@@ -142,7 +142,19 @@ export type Lawyer = {
 };
 
 export const lawyers: Lawyer[] = [
-  // TODO(tashfeen): paste the real list here. Shape:
+  // TODO(tashfeen): full list pending from the firm. Confirmed so far (2026-07-17),
+  // but NOT publishable yet — a first name without a credential invites the exact
+  // question it is meant to answer ("called where? registered where?"), and on a
+  // YMYL page an unverifiable claim of legal qualification is worse than silence:
+  //
+  //   • Arslan  — in the CRM as "Raja Arslan Arslan" (currently filed under Sales)
+  //   • Tipu    — in the CRM as "Abdullah Tippu"     (currently filed under Sales)
+  //   • Ayesha  — not in the CRM
+  //   • Ayesha  — not in the CRM (second person of the same first name; needs
+  //               disambiguating before either can be listed)
+  //
+  // Each still needs: full name as on the licence, credential + issuing body,
+  // what they practise, and ideally a public-register link. Then paste as:
   // { name: '', credential: '', practice: '', since: '', verifyUrl: '', photo: '' },
 ];
 
