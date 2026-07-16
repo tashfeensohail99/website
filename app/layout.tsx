@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import '../styles/globals.css';
 import { site } from '@/lib/site';
+import { StructuredData } from '@/components/StructuredData';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -39,6 +40,9 @@ const NAV = [
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <StructuredData />
+      </head>
       <body className="bg-paper text-ink-900">
         <a
           href="#main"
