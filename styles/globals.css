@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+/* =========================================================
+   tashfeenimmigrationsolutions.com — public site tokens.
+
+   Deliberately NOT the CRM's design system: this is read by
+   scam-wary strangers on mid-range Androids over patchy
+   networks, not by staff on desks. Priorities are legibility,
+   weight, and speed — no webfonts, no gradients, no widgets.
+   ========================================================= */
+
+@theme {
+  /* Ink navy — the firm's existing brand direction, carried over. */
+  --color-ink-50:  #f2f5f9;
+  --color-ink-200: #c7d2e0;
+  --color-ink-400: #6b829f;
+  --color-ink-600: #2f4661;
+  --color-ink-800: #16283d;
+  --color-ink-900: #0d1b2b;
+
+  /* Single accent, spent sparingly on the one action that matters. */
+  --color-accent-500: #b03a22;
+  --color-accent-600: #94301c;
+  --color-accent-50:  #fbefec;
+
+  /* WhatsApp's own green — used ONLY on WhatsApp CTAs, where the
+     colour is a recognised affordance rather than our decoration. */
+  --color-wa-500: #128c7e;
+  --color-wa-600: #0d6b60;
+
+  --color-paper: #ffffff;
+  --color-paper-alt: #f6f8fa;
+  --color-rule: #dde3ea;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+body { min-height: 100vh; line-height: 1.6; }
+
+/* Never let a long slug or an Urdu string push the page sideways on a phone. */
+img, svg { max-width: 100%; height: auto; }
+
+:focus-visible { outline: 2px solid var(--color-accent-500); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
