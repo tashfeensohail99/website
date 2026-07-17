@@ -1,4 +1,4 @@
-import { site, type ServiceCode } from './site';
+import { type ServiceCode } from './site';
 
 /**
  * Build a click-to-WhatsApp link that the CRM can attribute.
@@ -49,20 +49,19 @@ export function refToken(intent: WaIntent): string {
   return `${REF_PREFIX[intent.service]}-${code}`;
 }
 
-export function waHref(intent: WaIntent): string {
-  // An unset number yields https://wa.me/?text=… — a link that opens WhatsApp
-  // with no recipient. It looks fine in review and loses every enquiry. Fail the
-  // production build instead of shipping a dead CTA; in dev, render an obviously
-  // broken href so it's caught on the first click rather than in month three.
-  if (!site.whatsappNumber) {
-    if (process.env.NODE_ENV === 'production') {
-      throw new Error(
-        'NEXT_PUBLIC_WA_NUMBER is not set. Every WhatsApp CTA would be a dead link — ' +
-          'set it (E.164 digits, no "+", e.g. 923001234567) before building.',
-      );
-    }
-    return '#whatsapp-number-not-configured';
-  }
+/**
+ * @param digits the ACTIVE channel's number, E.164 without "+", resolved from the
+ *   CRM by lib/wa-channel.ts. Passed in rather than read from config so there is
+ *   exactly one place that decides which number the site points at.
+ */
+export function waHref(intent: WaIntent, digits: string): string {
+  // An empty number yields https://wa.me/?text=… — a link that opens WhatsApp
+  // with no recipient. It looks fine in review and loses every enquiry.
+  // getWhatsAppChannel() already fails the production build in that case; this is
+  // the belt-and-braces for dev, where an obviously broken href gets caught on the
+  // first click rather than in month three.
+  if (!digits) return '#whatsapp-number-not-configured';
+
   const text = `${intent.message} [Ref: ${refToken(intent)}]`;
-  return `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${digits}?text=${encodeURIComponent(text)}`;
 }

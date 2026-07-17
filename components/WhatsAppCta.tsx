@@ -1,12 +1,25 @@
 import { waHref, type WaIntent } from '@/lib/wa';
+import { getWhatsAppChannel } from '@/lib/wa-channel';
 
 /**
- * The site's primary action. A plain anchor by design — no chat widget, no
- * script: 0 bytes, survives ad blockers, and opens the app the audience already
- * lives in. The ref token inside the message is what makes the resulting lead
- * attributable in the CRM (see lib/wa.ts).
+ * The site's primary action, and the entry point into the existing CRM.
+ *
+ * A plain anchor by design — no chat widget, no script: 0 bytes, survives ad
+ * blockers, and opens the app the audience already lives in. Crucially the
+ * CUSTOMER sends the first message, which opens WhatsApp's free 24-hour service
+ * window; a web form would instead leave us needing a paid approved template to
+ * reach them back.
+ *
+ * From the send onward it is entirely the firm's own system: Meta → the existing
+ * webhook → Lead created → ensureAssigned() round-robin → the existing inbox and
+ * AI bot. The ref token in the message is the only addition, and it is what lets
+ * the webhook stamp sourceChannel='website' instead of losing the lead among
+ * 22,582 cold contacts.
+ *
+ * Async server component: the number is resolved from the CRM's ACTIVE channel at
+ * build time, so the page stays static and ships no client JS.
  */
-export function WhatsAppCta({
+export async function WhatsAppCta({
   intent,
   children,
   variant = 'solid',
@@ -15,6 +28,7 @@ export function WhatsAppCta({
   children: React.ReactNode;
   variant?: 'solid' | 'ghost';
 }) {
+  const { digits } = await getWhatsAppChannel();
   const base =
     'inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-base font-semibold transition-colors';
   const styles =
@@ -23,7 +37,7 @@ export function WhatsAppCta({
       : 'border border-rule bg-paper text-ink-800 hover:bg-paper-alt';
 
   return (
-    <a href={waHref(intent)} className={`${base} ${styles}`} rel="noopener">
+    <a href={waHref(intent, digits)} className={`${base} ${styles}`} rel="noopener">
       <WhatsAppGlyph />
       {children}
     </a>

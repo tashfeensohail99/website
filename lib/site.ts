@@ -16,8 +16,17 @@ export const site = {
   /** An international firm — Canada, USA, UK and Europe. Not a Canada-only shop. */
   tagline: 'Immigration, handled by real lawyers.',
 
-  /** WhatsApp Business number in E.164 digits, no "+". Drives every CTA. */
-  whatsappNumber: process.env.NEXT_PUBLIC_WA_NUMBER ?? '', // PLACEHOLDER
+  /**
+   * The WhatsApp Business number every CTA opens.
+   *
+   * DO NOT set this by hand. It is fetched at build time from the CRM's ACTIVE
+   * WhatsAppChannel (see lib/wa-channel.ts) — the CRM is the single source of
+   * truth. Hardcoding it here would mean switching the active channel in the
+   * admin panel silently leaves the website pointing at a dead number.
+   *
+   * The env var below is only a local-dev escape hatch.
+   */
+  whatsappNumberFallback: process.env.NEXT_PUBLIC_WA_NUMBER ?? '',
 
   /** The paid consultation. Creditable against the service fee if they proceed. */
   consultFee: { amount: 5000, currency: 'PKR', creditable: true },
