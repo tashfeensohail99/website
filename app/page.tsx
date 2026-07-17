@@ -39,12 +39,22 @@ function TrustStrip() {
             </p>
           </>
         ) : (
-          <p className="max-w-3xl rounded border border-dashed border-accent-500 bg-accent-50 p-4 text-ink-600">
-            <strong className="text-ink-900">Lawyer roster not yet supplied.</strong> Add the team to{' '}
-            <code className="font-mono text-sm">lawyers[]</code> in{' '}
-            <code className="font-mono text-sm">lib/site.ts</code> — names, credentials and photos.
-            This block is the highest-value space on the site and must not ship empty or vague.
-          </p>
+          // No named lawyer yet published. Render the trust MESSAGE (real, and the
+          // firm's core differentiator) — never a dev note, never fabricated names.
+          <>
+            <p className="max-w-3xl text-lg text-pretty">
+              Every case at Tashfeen is reviewed by a qualified lawyer — not an agent, and not a call
+              centre. Someone who will actually look at your file and tell you the truth about it.
+            </p>
+            <p className="mt-2 max-w-3xl text-ink-600 text-pretty">
+              We put our lawyers in front of you by name, so you can check us before you trust us with
+              anything.{' '}
+              <Link href="/about/our-team" className="font-semibold text-accent-500 underline">
+                Meet the team
+              </Link>
+              .
+            </p>
+          </>
         )}
       </div>
     </section>

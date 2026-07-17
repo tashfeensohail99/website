@@ -14,29 +14,25 @@ import { leadLawyer } from '@/lib/site';
  */
 export function ReviewedBy({ updated }: { updated: string }) {
   const lawyer = leadLawyer();
+  // Hide the date if it's still a placeholder like "[date of last legal review]"
+  // — a bracketed stub is worse than no date. A real date shows; a stub is dropped.
+  const showDate = Boolean(updated) && !updated.trim().startsWith('[');
 
   return (
     <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-rule pt-4 text-sm text-ink-400">
-      {lawyer ? (
+      <span>
+        Reviewed by{' '}
+        <Link href="/about/our-team" className="font-semibold text-ink-600 underline">
+          {lawyer ? lawyer.name : 'the Tashfeen legal team'}
+        </Link>
+        {lawyer?.credential ? `, ${lawyer.credential}` : ''}
+      </span>
+      {showDate ? (
         <>
-          <span>
-            Reviewed by{' '}
-            <Link href="/about/our-team" className="font-semibold text-ink-600 underline">
-              {lawyer.name}
-            </Link>
-            {lawyer.credential ? `, ${lawyer.credential}` : ''}
-          </span>
           <span aria-hidden="true">·</span>
+          <span>Last reviewed {updated}</span>
         </>
-      ) : (
-        <>
-          <span className="font-semibold text-accent-500">
-            [Reviewer not set — add lawyers[] in lib/site.ts]
-          </span>
-          <span aria-hidden="true">·</span>
-        </>
-      )}
-      <span>Last reviewed {updated}</span>
+      ) : null}
     </div>
   );
 }

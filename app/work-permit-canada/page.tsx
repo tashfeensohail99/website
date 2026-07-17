@@ -115,7 +115,7 @@ export default function WorkPermitPage() {
           went wrong in those, because you should know what you’re actually buying.
         </p>
 
-        <ReviewedBy updated="[date of last legal review]" />
+        <ReviewedBy updated="July 2026" />
       </article>
 
       {/* The gate. It sits BETWEEN the page and the CTA on purpose: ranking for

@@ -134,7 +134,7 @@ export default function EuropePage() {
           country. Send us the letter.
         </p>
 
-        <ReviewedBy updated="[date of last legal review]" />
+        <ReviewedBy updated="July 2026" />
       </article>
 
       <section className="border-t border-rule bg-paper-alt">

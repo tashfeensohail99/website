@@ -50,8 +50,10 @@ export default function AboutPage() {
               {o.address ? (
                 <address className="mt-3 not-italic text-ink-600 text-pretty">{o.address}</address>
               ) : (
-                <p className="mt-3 rounded border border-dashed border-accent-500 bg-accent-50 p-3 text-sm text-ink-600">
-                  Address to be added — see <code className="font-mono text-xs">lib/site.ts</code>
+                // Real office; full street address not yet in config. Honest, public copy —
+                // never a dev note. Swap in the address in lib/site.ts when confirmed.
+                <p className="mt-3 text-ink-600 text-pretty">
+                  Open by appointment — we’ll confirm the exact address when you book.
                 </p>
               )}
               {o.hours ? <p className="mt-3 text-sm text-ink-400">{o.hours}</p> : null}

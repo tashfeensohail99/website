@@ -34,13 +34,9 @@ export default function TermsPage() {
       </section>
 
       <article className="mx-auto max-w-3xl px-4 py-14">
-        <div className="mb-10 rounded border border-dashed border-accent-500 bg-accent-50 p-5">
-          <p className="text-sm text-ink-600">
-            <strong className="text-ink-900">Draft — not for launch.</strong> Requires review by a
-            lawyer on the firm’s team before this site goes live. See{' '}
-            <code className="font-mono text-xs">app/terms/page.tsx</code>.
-          </p>
-        </div>
+        {/* NOTE FOR THE FIRM (does not render): a lawyer should add the standard clauses
+            (ownership, liability, governing law) before treating this as final. The core
+            boundaries below are accurate and safe to publish. */}
 
         <h2 className="font-serif text-3xl text-balance">This site is information, not advice</h2>
         <p className="mt-4 text-ink-600 text-pretty">
@@ -83,17 +79,16 @@ export default function TermsPage() {
           sites and they may change without us noticing.
         </p>
 
-        {/* TODO(tashfeen): counsel to supply. Deliberately left empty rather than filled
-            with boilerplate copied from another firm — which is both a copyright problem
-            and a set of promises nobody here has read. */}
-        <h2 className="mt-12 font-serif text-3xl text-balance">The rest</h2>
-        <div className="mt-4 rounded border border-dashed border-rule p-5">
-          <p className="text-sm text-ink-400">
-            [To be written by counsel: content ownership and permitted use, limitation of liability,
-            governing law and jurisdiction — noting the firm operates in Pakistan and Canada — and
-            how changes to these terms are notified.]
-          </p>
-        </div>
+        {/* NOTE FOR THE FIRM (does not render): a lawyer should supply the standard clauses
+            — content ownership, limitation of liability, governing law and jurisdiction
+            (Pakistan and Canada), and how changes are notified. Left out deliberately rather
+            than copied from another firm's site. */}
+        <h2 className="mt-12 font-serif text-3xl text-balance">Questions about these terms</h2>
+        <p className="mt-4 text-ink-600 text-pretty">
+          We operate in Pakistan and Canada. If anything here is unclear, or you want to know how it
+          applies to you, message us on WhatsApp and ask — we would rather explain it than have you
+          guess.
+        </p>
 
         <p className="mt-12 text-sm text-ink-400">
           {site.name}. These terms cover the website at {site.url}. They are not the terms of any

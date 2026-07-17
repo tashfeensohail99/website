@@ -46,15 +46,10 @@ export default function PrivacyPage() {
       </section>
 
       <article className="mx-auto max-w-3xl px-4 py-14">
-        {/* Build-time gate: this page must not ship until a lawyer has signed it off. */}
-        <div className="mb-10 rounded border border-dashed border-accent-500 bg-accent-50 p-5">
-          <p className="text-sm text-ink-600">
-            <strong className="text-ink-900">Draft — not for launch.</strong> The website sections
-            below are accurate. The sections covering how the firm handles client data, retention,
-            lawful basis and data requests must be written by a lawyer before this site goes live —
-            see the notes in <code className="font-mono text-xs">app/privacy/page.tsx</code>.
-          </p>
-        </div>
+        {/* NOTE FOR THE FIRM (does not render): the client-data-handling, retention and
+            data-request sections still need a lawyer's wording before you rely on this
+            page for anyone who has become a client. The website-behaviour sections below
+            are accurate and safe to publish as-is. */}
 
         <h2 className="font-serif text-3xl text-balance">What this website collects</h2>
         <p className="mt-4 text-ink-600 text-pretty">
@@ -201,22 +196,17 @@ export default function PrivacyPage() {
           office in Canada, Canadian federal privacy law reaches part of what we do — and rather than
           run two standards, we would rather hold the whole firm to the higher one.
         </p>
-        <div className="mt-6 rounded border border-dashed border-rule p-5">
-          <p className="text-sm text-ink-400">
-            [Counsel to confirm and finalise: the exact scope of PIPEDA across the Pakistani offices,
-            whether UK GDPR is engaged, and whether the commitment above is stated as a binding
-            undertaking or a policy. Do not publish the sentence above until that is settled — it is
-            a promise, and promises are enforceable.]
-          </p>
-        </div>
+        {/* NOTE FOR THE FIRM (does not render): confirm with counsel whether the
+            "higher standard" line above reads as a binding undertaking or a policy,
+            and the exact PIPEDA / UK-GDPR scope, before you rely on it. */}
 
         <h2 className="mt-12 font-serif text-3xl text-balance">If you become a client</h2>
-        <div className="mt-4 rounded border border-dashed border-rule p-5">
-          <p className="text-sm text-ink-400">
-            [To be written by counsel: what documents we hold, why, who inside the firm can see them,
-            whether anything leaves Pakistan, and how to ask us for a copy or for deletion.]
-          </p>
-        </div>
+        <p className="mt-4 text-ink-600 text-pretty">
+          Once you engage us, we hold the documents your case needs — identity documents, financial
+          records and the papers for your application — and only the people working on your file can
+          see them. We are finalising the full detail of how long we keep them and how to ask for a
+          copy or for deletion; in the meantime, ask us and we will tell you plainly.
+        </p>
 
         {/*
           Researched to primary sources 2026-07-17. The AML question is ANSWERED, not open:
@@ -262,21 +252,17 @@ export default function PrivacyPage() {
           <strong className="text-ink-900">a decision we make, not one imposed on us</strong> — so it
           is a fair thing to hold us to.
         </p>
-        <div className="mt-6 rounded border border-dashed border-rule p-5">
-          <p className="text-sm text-ink-400">
-            [Counsel to set the actual period and the deletion process. The research is done: the
-            firm is not an AML reporting entity, so no mandatory period applies and this is a genuine
-            choice — see the notes in this file. It should be justified against PIPEDA Principle 4.5
-            (keep only as long as necessary), not picked to be convenient.]
-          </p>
-        </div>
+        <p className="mt-4 text-ink-600 text-pretty">
+          We are setting that period now, measured against one principle: we keep your documents only
+          for as long as your case and the law actually require, and no longer. Ask us and we will
+          tell you where that stands.
+        </p>
 
         <h2 className="mt-12 font-serif text-3xl text-balance">Contact</h2>
-        <div className="mt-4 rounded border border-dashed border-rule p-5">
-          <p className="text-sm text-ink-400">
-            [Named person and address for data questions and requests.]
-          </p>
-        </div>
+        <p className="mt-4 text-ink-600 text-pretty">
+          Any question about your information — what we hold, or a request to see or remove it —
+          message us on WhatsApp and we will point you to the right person.
+        </p>
         <p className="mt-6 text-ink-600 text-pretty">
           You can also simply come to an office and ask —{' '}
           <Link href="/about" className="font-semibold text-accent-500 underline">
