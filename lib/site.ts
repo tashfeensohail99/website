@@ -157,48 +157,33 @@ export type Lawyer = {
 };
 
 /**
- * Demo roster so the page can be reviewed. Read this before touching it:
+ * The published roster. EMPTY on purpose — the firm has not yet supplied
+ * confirmable credentials, so the team page renders a dignified "profiles coming
+ * soon" state rather than fabricating anything. That is a deliberate launch
+ * decision, not an oversight.
  *
- * The NAMES are real — the firm named these four people. The CREDENTIALS are
- * deliberately blank, and must stay blank until the firm supplies them.
+ * To publish the real team, paste one entry per lawyer below:
  *
- * Inventing a plausible-looking credential ("Advocate, High Court, since 2015")
- * would not be filler text. Attached to a real, named, identifiable person it is
- * a specific factual claim about that individual's professional standing, made
- * in public, on the firm's own site — and this repository is public. If it is
- * wrong it is a misrepresentation of a regulated qualification that harms the
- * named person, not just the page. A blank is recoverable; a false credential
- * that someone verifies against a bar register is not.
+ *   { name: 'Full Name As On Licence',
+ *     credential: 'Advocate, High Court' | 'RCIC #R######',   // + issuing body
+ *     practice: 'What they actually handle',
+ *     since: '2015',                        // optional; omit rather than guess
+ *     verifyUrl: 'https://public-register/...',  // optional but ideal
+ *     photo: '/team/name.jpg' },            // a real photograph, never stock
  *
- * So: placeholders render as visible "not yet confirmed" gaps, and the guard
- * below makes it impossible to ship them by accident.
+ * Names the firm has NAMED but not yet credentialed (do NOT publish a guessed
+ * credential for any of them — attached to a real person it is a false claim
+ * about a regulated qualification):
+ *   • Raja Arslan Arslan  (CRM; confirm spelling on the licence)
+ *   • Abdullah Tippu       (CRM; confirm spelling on the licence)
+ *   • Ayesha               (not in CRM — full name needed)
+ *   • Ayesha               (second person, same first name — must disambiguate)
+ *
+ * assertLawyersPublishable() below HARD-FAILS the production build on any entry
+ * missing a credential/practice or still flagged demo:true — so it is impossible
+ * to accidentally ship an unconfirmed one.
  */
-export const lawyers: Lawyer[] = [
-  {
-    name: 'Raja Arslan Arslan', // as recorded in the CRM; confirm spelling on the licence
-    credential: '',
-    practice: '',
-    demo: true,
-  },
-  {
-    name: 'Abdullah Tippu', // as recorded in the CRM; confirm spelling on the licence
-    credential: '',
-    practice: '',
-    demo: true,
-  },
-  {
-    name: 'Ayesha', // not in the CRM — full name needed
-    credential: '',
-    practice: '',
-    demo: true,
-  },
-  {
-    name: 'Ayesha', // second person of the same first name — must be disambiguated
-    credential: '',
-    practice: '',
-    demo: true,
-  },
-];
+export const lawyers: Lawyer[] = [];
 
 /**
  * Refuses to build for production while any placeholder remains.

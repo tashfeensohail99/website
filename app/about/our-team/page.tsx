@@ -49,8 +49,23 @@ export default function TeamPage() {
         ) : null}
 
         {lawyers.length === 0 ? (
-          <div className="rounded border border-dashed border-accent-500 bg-accent-50 p-6">
-            <p className="font-semibold text-ink-900">Roster not yet supplied.</p>
+          // Roster not yet published. A dignified public state — never fabricate a
+          // name or credential to fill it. The trust section below carries the page.
+          <div className="rounded border border-rule bg-paper-alt p-8">
+            <h2 className="font-serif text-2xl text-balance">Individual profiles are on their way</h2>
+            <p className="mt-3 max-w-2xl text-ink-600 text-pretty">
+              We’re finalising the profiles of the qualified lawyers who review the cases here — name,
+              qualification, and where you can independently verify each one. Until they’re up, the
+              most important thing still holds:{' '}
+              <strong className="text-ink-900">
+                ask us who will handle your file, and we’ll tell you, by name.
+              </strong>
+            </p>
+            <p className="mt-4">
+              <Link href="/book-consultation" className="font-semibold text-accent-500 underline">
+                Book a consultation and ask us directly →
+              </Link>
+            </p>
           </div>
         ) : (
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
