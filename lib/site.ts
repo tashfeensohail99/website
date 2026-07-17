@@ -148,27 +148,84 @@ export type Lawyer = {
   verifyUrl?: string;
   /** Path under /public. A real photograph — never a stock image. */
   photo?: string;
+  /**
+   * Unconfirmed placeholder. Renders visibly as a gap and HARD-FAILS the
+   * production build (see assertLawyersPublishable). Delete the flag only when
+   * every other field on the entry is true and checkable.
+   */
+  demo?: true;
 };
 
+/**
+ * Demo roster so the page can be reviewed. Read this before touching it:
+ *
+ * The NAMES are real — the firm named these four people. The CREDENTIALS are
+ * deliberately blank, and must stay blank until the firm supplies them.
+ *
+ * Inventing a plausible-looking credential ("Advocate, High Court, since 2015")
+ * would not be filler text. Attached to a real, named, identifiable person it is
+ * a specific factual claim about that individual's professional standing, made
+ * in public, on the firm's own site — and this repository is public. If it is
+ * wrong it is a misrepresentation of a regulated qualification that harms the
+ * named person, not just the page. A blank is recoverable; a false credential
+ * that someone verifies against a bar register is not.
+ *
+ * So: placeholders render as visible "not yet confirmed" gaps, and the guard
+ * below makes it impossible to ship them by accident.
+ */
 export const lawyers: Lawyer[] = [
-  // TODO(tashfeen): full list pending from the firm. Confirmed so far (2026-07-17),
-  // but NOT publishable yet — a first name without a credential invites the exact
-  // question it is meant to answer ("called where? registered where?"), and on a
-  // YMYL page an unverifiable claim of legal qualification is worse than silence:
-  //
-  //   • Arslan  — in the CRM as "Raja Arslan Arslan" (currently filed under Sales)
-  //   • Tipu    — in the CRM as "Abdullah Tippu"     (currently filed under Sales)
-  //   • Ayesha  — not in the CRM
-  //   • Ayesha  — not in the CRM (second person of the same first name; needs
-  //               disambiguating before either can be listed)
-  //
-  // Each still needs: full name as on the licence, credential + issuing body,
-  // what they practise, and ideally a public-register link. Then paste as:
-  // { name: '', credential: '', practice: '', since: '', verifyUrl: '', photo: '' },
+  {
+    name: 'Raja Arslan Arslan', // as recorded in the CRM; confirm spelling on the licence
+    credential: '',
+    practice: '',
+    demo: true,
+  },
+  {
+    name: 'Abdullah Tippu', // as recorded in the CRM; confirm spelling on the licence
+    credential: '',
+    practice: '',
+    demo: true,
+  },
+  {
+    name: 'Ayesha', // not in the CRM — full name needed
+    credential: '',
+    practice: '',
+    demo: true,
+  },
+  {
+    name: 'Ayesha', // second person of the same first name — must be disambiguated
+    credential: '',
+    practice: '',
+    demo: true,
+  },
 ];
 
+/**
+ * Refuses to build for production while any placeholder remains.
+ *
+ * The whole promise of this site is "we are real lawyers, go and check". Demo
+ * entries shipping to the live domain would falsify precisely that claim, on
+ * the one page it is made. A visible banner is not enough — banners get
+ * overlooked at 2am on a launch day. This throws.
+ */
+export function assertLawyersPublishable(): void {
+  if (process.env.NODE_ENV !== 'production') return;
+  const bad = lawyers.filter((l) => l.demo || !l.credential.trim() || !l.practice.trim());
+  if (bad.length) {
+    throw new Error(
+      `Refusing to build: ${bad.length} lawyer(s) still placeholder — ${bad
+        .map((l) => l.name)
+        .join(', ')}. Fill in credential + practice and remove \`demo: true\` in lib/site.ts. ` +
+        'Never invent a credential for a named person.',
+    );
+  }
+}
+
+/** Lawyers that are safe to state publicly. Empty while the roster is demo. */
+export const publishableLawyers = (): Lawyer[] => lawyers.filter((l) => !l.demo);
+
 /** The lawyer named on the homepage and on bylines where only one fits. */
-export const leadLawyer = (): Lawyer | undefined => lawyers[0];
+export const leadLawyer = (): Lawyer | undefined => publishableLawyers()[0];
 
 /** Canonical service codes — must match SERVICE_TYPE_CODES in the backend so a
  *  web lead lands in the CRM with a serviceInterest the funnel report understands.

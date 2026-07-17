@@ -83,41 +83,63 @@ export default function FeesPage() {
           <strong className="text-ink-900">you don’t know what you’re paying them.</strong> Ask.
         </p>
 
-        <h2 className="mt-12 font-serif text-3xl text-balance">Our fees by service</h2>
-        {/* TODO(tashfeen): real ranges. Do not publish this section until they exist. */}
-        <div className="mt-6 rounded border border-dashed border-accent-500 bg-accent-50 p-5">
-          <p className="text-sm text-ink-600">
-            <strong className="text-ink-900">Not yet published.</strong> Real ranges required from
-            the firm before this section ships — see <code className="font-mono text-xs">app/fees/page.tsx</code>.
-            An invented figure is worse than none: prospects self-disqualify on a number that isn’t
-            ours, or hold us to one we never quoted.
-          </p>
-        </div>
+        <h2 className="mt-12 font-serif text-3xl text-balance">What we have actually charged</h2>
+        <p className="mt-4 text-ink-600 text-pretty">
+          Not a marketing range — these are the real spreads from agreements clients have signed with
+          us. Where we have handled too few cases to show an honest range, we say so rather than
+          inventing one.
+        </p>
+        {/*
+          Source: crm agreements, live data pulled 2026-07-17. Active (non-cancelled,
+          non-deleted) agreements with totalAmount > 0, grouped by categoryKey+currency.
+          n is the real count. Zero-value drafts excluded.
+
+          TODO(tashfeen): CONFIRM COMPOSITION before launch. This is Agreement.totalAmount —
+          what the client contracts to pay the firm. If it already includes government
+          fees passed through, then presenting it under "our fee" beside a separate
+          "government fees" column double-counts and misleads. The whole point of this
+          page is the split; getting the split wrong is worse than not publishing.
+
+          Refresh: scripts/dig-real-outcomes.ts
+        */}
         <div className="mt-6 overflow-x-auto rounded border border-rule">
           <table className="w-full text-left text-sm">
             <thead>
               <tr className="border-b border-rule bg-paper-alt">
                 <th className="p-3 font-semibold">Service</th>
-                <th className="p-3 font-semibold">Our fee</th>
-                <th className="p-3 font-semibold">Government fees</th>
+                <th className="p-3 font-semibold">What clients have paid</th>
+                <th className="p-3 font-semibold">Typical</th>
+                <th className="p-3 font-semibold">Cases</th>
               </tr>
             </thead>
             <tbody className="text-ink-600">
               {[
-                ['Canada work permit (C11)', '[range]', '[amount] — paid to IRCC'],
-                ['Canada visit visa', '[range]', '[amount] — paid to IRCC'],
-                ['Visa refused — review of your case', '[range]', '—'],
-                ['Judicial review (Federal Court)', '[range]', '[court filing fees]'],
-              ].map(([svc, ours, govt]) => (
+                ['Canada visit visa', 'PKR 115,000 – 270,000', 'PKR 150,000', '51'],
+                ['Canada work permit (C11)', 'PKR 2,600,000 – 3,000,000', 'PKR 2,600,000', '13'],
+                ['Canada work permit (C11), billed in CAD', 'CAD 11,000 – 20,000', 'CAD 13,000', '10'],
+                ['Judicial review after a refusal', 'PKR 350,000 – 650,000', 'PKR 450,000', '8'],
+                ['US investor visa (E-2) · Canada C10', 'Too few cases to publish a range', '—', '2 each'],
+              ].map(([svc, range, typical, cases]) => (
                 <tr key={svc} className="border-b border-rule last:border-0">
                   <td className="p-3 font-medium text-ink-900">{svc}</td>
-                  <td className="p-3">{ours}</td>
-                  <td className="p-3">{govt}</td>
+                  <td className="p-3">{range}</td>
+                  <td className="p-3">{typical}</td>
+                  <td className="p-3 tabular-nums">{cases}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <p className="mt-4 text-sm text-ink-400 text-pretty">
+          Government fees are on top of these and are paid to IRCC, not to us. Your own case may fall
+          outside these ranges — they are what happened, not a quote.
+        </p>
+        <p className="mt-4 text-ink-600 text-pretty">
+          Notice the spread on the visit visa: the cheapest case cost less than half the most
+          expensive. That is not inconsistency — it is the difference between one straightforward
+          applicant and a family with a refusal history. Anyone quoting you a single fixed number
+          before looking at your file is quoting the wrong number.
+        </p>
 
         <h2 className="mt-12 font-serif text-3xl text-balance">How we don’t charge</h2>
         <dl className="mt-6 space-y-5">

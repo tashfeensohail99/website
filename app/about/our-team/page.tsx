@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { lawyers, site } from '@/lib/site';
+import { lawyers, site, assertLawyersPublishable } from '@/lib/site';
 
 export const metadata: Metadata = {
   title: 'Our Lawyers',
@@ -10,6 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function TeamPage() {
+  // Fails the production build while any entry is still a placeholder. This page
+  // makes the claim the whole site rests on — "we are real lawyers, go and check"
+  // — so it is the one page that must never render an unverified credential.
+  assertLawyersPublishable();
+
+  const demoCount = lawyers.filter((l) => l.demo).length;
+
   return (
     <>
       <section className="border-b border-rule bg-ink-900 text-white">
@@ -25,21 +32,35 @@ export default function TeamPage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16">
+        {demoCount > 0 ? (
+          <div className="mb-8 rounded border border-dashed border-accent-500 bg-accent-50 p-5">
+            <p className="font-semibold text-ink-900">
+              Preview only — {demoCount} {demoCount === 1 ? 'entry is' : 'entries are'} unconfirmed.
+            </p>
+            <p className="mt-2 max-w-3xl text-sm text-ink-600 text-pretty">
+              The names are real. The credentials are blank on purpose: nobody has invented one. Fill
+              in <code className="font-mono text-xs">lawyers[]</code> in{' '}
+              <code className="font-mono text-xs">lib/site.ts</code> — full name as it appears on the
+              licence, the credential and its issuing body, what they practise, and where possible a
+              public-register link. The production build refuses to run until every placeholder is
+              gone, so this banner cannot reach the live site.
+            </p>
+          </div>
+        ) : null}
+
         {lawyers.length === 0 ? (
           <div className="rounded border border-dashed border-accent-500 bg-accent-50 p-6">
             <p className="font-semibold text-ink-900">Roster not yet supplied.</p>
-            <p className="mt-2 max-w-2xl text-ink-600 text-pretty">
-              Add each lawyer to <code className="font-mono text-sm">lawyers[]</code> in{' '}
-              <code className="font-mono text-sm">lib/site.ts</code>: full name as it appears on
-              their licence, credential and issuing body, what they handle, and a real photograph.
-              Where a public register exists, link it — inviting people to verify you is the whole
-              point of this page.
-            </p>
           </div>
         ) : (
           <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {lawyers.map((l) => (
-              <li key={l.name} className="flex flex-col rounded border border-rule p-6">
+            {lawyers.map((l, i) => (
+              <li
+                key={`${l.name}-${i}`}
+                className={`flex flex-col rounded border p-6 ${
+                  l.demo ? 'border-dashed border-accent-500 bg-accent-50/40' : 'border-rule'
+                }`}
+              >
                 {l.photo ? (
                   // Plain <img>: these are a handful of small, static portraits. next/image
                   // would add a runtime dependency and a loader for no measurable gain.
@@ -57,8 +78,27 @@ export default function TeamPage() {
                   </div>
                 )}
                 <h2 className="font-serif text-xl">{l.name}</h2>
-                <p className="mt-1 text-sm font-semibold text-accent-500">{l.credential}</p>
-                <p className="mt-3 flex-1 text-ink-600 text-pretty">{l.practice}</p>
+
+                {/* A blank credential renders as an explicit gap. It must never read as
+                    a qualification, and it must never be silently omitted — an empty
+                    space under a lawyer's name looks like an oversight; this looks like
+                    what it is. */}
+                {l.credential ? (
+                  <p className="mt-1 text-sm font-semibold text-accent-500">{l.credential}</p>
+                ) : (
+                  <p className="mt-1 text-sm font-semibold text-ink-400">
+                    Credential not yet confirmed
+                  </p>
+                )}
+
+                {l.practice ? (
+                  <p className="mt-3 flex-1 text-ink-600 text-pretty">{l.practice}</p>
+                ) : (
+                  <p className="mt-3 flex-1 text-sm text-ink-400 text-pretty">
+                    Practice area to be supplied by the firm.
+                  </p>
+                )}
+
                 {l.since ? (
                   <p className="mt-3 text-sm text-ink-400">Practising since {l.since}</p>
                 ) : null}
