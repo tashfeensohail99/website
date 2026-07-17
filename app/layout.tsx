@@ -1,9 +1,21 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { Fraunces, Inter } from 'next/font/google';
 import Link from 'next/link';
 import '../styles/globals.css';
 import { site } from '@/lib/site';
+import { Logo } from '@/components/Logo';
 import { StructuredData } from '@/components/StructuredData';
+
+/* Premium type pairing: Fraunces (a modern, high-contrast serif) for display,
+   Inter for body. Loaded via next/font — self-hosted at build time, no layout
+   shift, and it makes the single biggest difference to how the site "feels". */
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+});
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -18,16 +30,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-/**
- * Six items. The old site had fifty — a visitor who sees a twelve-service
- * dropdown doesn't think "capable", they think "agent".
- *
- * Destinations lead, because an international firm's nav should answer "do you
- * do my country?" before anything else. Canada sits first: it is the largest
- * practice and the only one with a full hub behind it. "Visa Refused" earns a
- * top-level slot despite being smaller than the rest, because that visitor is
- * holding a refusal letter and needs the door to be obvious.
- */
 const NAV = [
   { href: '/work-permit-canada', label: 'Canada' },
   { href: '/usa', label: 'USA' },
@@ -39,39 +41,37 @@ const NAV = [
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
       <head>
         <StructuredData />
       </head>
       <body className="bg-paper text-ink-900">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>
 
-        <header className="border-b border-rule">
-          <nav className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-1 gap-y-2 px-4 py-3">
-            <Link href="/" className="mr-auto font-serif text-lg text-ink-900">
-              Tashfeen <span className="text-ink-400">Immigration</span>
+        {/* Sticky glass header */}
+        <header className="sticky top-0 z-50 border-b border-rule/70 bg-paper/80 backdrop-blur-md">
+          <nav className="mx-auto flex max-w-6xl items-center px-4 py-3">
+            <Link href="/" className="mr-auto" aria-label="Tashfeen Immigration Solutions — home">
+              <Logo variant="dark" />
             </Link>
-            <ul className="flex flex-wrap items-center gap-x-1">
+            <ul className="mr-7 hidden items-center gap-x-7 lg:flex">
               {NAV.map((n) => (
                 <li key={n.href}>
                   <Link
                     href={n.href}
-                    className="rounded px-3 py-2 text-sm text-ink-600 hover:bg-paper-alt hover:text-ink-900"
+                    className="link-underline text-sm font-medium text-ink-600 transition-colors hover:text-ink-900"
                   >
                     {n.label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <Link
-              href="/book-consultation"
-              className="rounded bg-accent-500 px-4 py-2 text-sm font-semibold text-white hover:bg-accent-600"
-            >
+            <Link href="/book-consultation" className="btn btn-gold !px-5 !py-2.5 text-sm">
               Book Consultation
             </Link>
           </nav>
@@ -79,22 +79,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
         <main id="main">{children}</main>
 
-        <footer className="mt-24 border-t border-rule bg-paper-alt">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <p className="font-serif text-lg">{site.name}</p>
-              <p className="mt-2 text-sm text-ink-400">{site.tagline}</p>
+        {/* Footer — navy, to close the page with weight */}
+        <footer className="mt-28 bg-navy text-ink-200">
+          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="sm:col-span-2 lg:col-span-1">
+              <Logo variant="light" />
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-ink-300">{site.tagline}</p>
+              <p className="mt-4 text-xs text-ink-400">Offices in Lahore · Islamabad · Mississauga</p>
             </div>
-            {/* Only link to pages that exist. A footer link is on every page, so a
-                404 here is a 404 everywhere — it wastes crawl budget and dead-ends a
-                real person who trusted the link. Still deliberately absent:
-                  /study-visa-canada — 3 leads ever; not worth a page
-                  /success-stories   — needs real filed/approved/refused counts first.
-                                       Publishing outcomes without a denominator is
-                                       exactly the claim /no-guarantee-policy tells
-                                       readers to distrust.
-                /about/our-offices was dropped outright: the offices already live on
-                /about, and a second page for the same content splits the signal. */}
             <FooterCol
               title="Services"
               links={[
@@ -118,21 +110,24 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 ['/about', 'About us'],
                 ['/about/our-team', 'Our lawyers'],
                 ['/book-consultation', 'Book a consultation'],
-                ['/no-guarantee-policy', 'Our no-guarantee policy'],
+                ['/no-guarantee-policy', 'No-guarantee policy'],
                 ['/privacy', 'Privacy'],
                 ['/terms', 'Terms'],
               ]}
             />
           </div>
-          <div className="border-t border-rule">
-            <p className="mx-auto max-w-6xl px-4 py-6 text-xs text-ink-400">
-              No one can guarantee the outcome of a visa application. Decisions are made by
-              Canadian visa officers, not by us.{' '}
-              <Link href="/no-guarantee-policy" className="underline">
-                Read our policy
-              </Link>
-              .
-            </p>
+          <div className="border-t border-white/10">
+            <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-6 text-xs text-ink-400 sm:flex-row sm:items-center sm:justify-between">
+              <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+              <p className="max-w-xl sm:text-right">
+                No one can guarantee the outcome of a visa application — decisions are made by visa
+                officers, not by us.{' '}
+                <Link href="/no-guarantee-policy" className="text-gold-300 underline underline-offset-2">
+                  Read our policy
+                </Link>
+                .
+              </p>
+            </div>
           </div>
         </footer>
       </body>
@@ -143,11 +138,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 function FooterCol({ title, links }: { title: string; links: [string, string][] }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-ink-400">{title}</p>
-      <ul className="mt-3 space-y-2">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-400">{title}</p>
+      <ul className="mt-4 space-y-2.5">
         {links.map(([href, label]) => (
           <li key={href}>
-            <Link href={href} className="text-sm text-ink-600 hover:text-ink-900 hover:underline">
+            <Link
+              href={href}
+              className="text-sm text-ink-300 transition-colors hover:text-white"
+            >
               {label}
             </Link>
           </li>

@@ -29,15 +29,15 @@ export async function WhatsAppCta({
   variant?: 'solid' | 'ghost';
 }) {
   const { digits } = await getWhatsAppChannel();
-  const base =
-    'inline-flex items-center justify-center gap-2 rounded px-5 py-3 text-base font-semibold transition-colors';
+  // 'solid' = the recognisable WhatsApp-green pill; works on any background.
+  // 'ghost' = a light-outline pill, used as the secondary action on dark hero fields.
   const styles =
     variant === 'solid'
-      ? 'bg-wa-500 text-white hover:bg-wa-600'
-      : 'border border-rule bg-paper text-ink-800 hover:bg-paper-alt';
+      ? 'btn text-white shadow-[0_10px_24px_-10px_rgba(31,168,85,0.6)] [background-image:linear-gradient(180deg,#26b862,#1fa855)] hover:-translate-y-0.5'
+      : 'btn btn-ghost-light';
 
   return (
-    <a href={waHref(intent, digits)} className={`${base} ${styles}`} rel="noopener">
+    <a href={waHref(intent, digits)} className={styles} rel="noopener">
       <WhatsAppGlyph />
       {children}
     </a>
