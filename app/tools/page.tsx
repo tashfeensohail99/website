@@ -41,7 +41,7 @@ const TOOLS = [
     icon: 'calculator' as const,
     kicker: 'Canada · Express Entry',
     title: 'CRS points calculator',
-    body: 'Your Comprehensive Ranking System score against the grid as it stands today — including the 2025 change most calculators still get wrong.',
+    body: 'Your Comprehensive Ranking System score against the grid as it stands today, plus a simple test you can run to check any calculator — including ours.',
     cta: 'Calculate my score',
   },
 ];

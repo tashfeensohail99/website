@@ -8,22 +8,39 @@ import { CRS_GRID_VERIFIED_ON, OFFICIAL_CALCULATOR_URL } from '@/lib/crs-grid';
 /**
  * The CRS calculator page.
  *
- * The highest-search-volume tool in this industry, and the one most competitors get
- * wrong — a large number of published calculators still award points for a job offer,
- * which stopped counting in March 2025. Being right about that is the whole reason
- * this page is worth having.
+ * NOTE ON COPY — READ BEFORE EDITING.
+ *
+ * An earlier draft of this page claimed that "most" (later "a lot of") published
+ * calculators still award job-offer points. A verification pass refuted it: the
+ * test used to reach that conclusion was invalid, because IRCC's Ministerial
+ * Instructions retained the provisions *defining* arranged employment, so a
+ * calculator may legitimately still ASK about a job offer and score it zero —
+ * IRCC's own tool does. Two competitors were also misclassified as stale when
+ * their scoring was in fact correct.
+ *
+ * So this page makes NO aggregate claim about competitors. It states what IRCC
+ * changed, and it hands the reader a test they can run against ANY calculator
+ * including ours. That is stronger anyway: it invites the reader to audit us,
+ * and it needs no maintenance.
+ *
+ * Do not reintroduce a comparative claim without evidence verified down to the
+ * scoring behaviour of each named tool.
  */
 export const metadata: Metadata = {
-  title: 'CRS Calculator — Express Entry Points (Updated)',
+  title: 'CRS Calculator — Express Entry Points',
   description:
-    'Free Express Entry CRS score calculator, rebuilt from IRCC’s current grid — including the 2025 removal of job-offer points that most calculators still get wrong.',
+    'Free Express Entry CRS score calculator built on IRCC’s current grid, including the March 2025 removal of job-offer points from the CRS. Check our arithmetic against IRCC’s own tool.',
   alternates: { canonical: '/tools/crs-calculator' },
 };
 
 const FAQS = [
   {
-    q: 'Why is my score lower here than on other websites?',
-    a: 'Most likely because they are still awarding you points for a job offer. Those points were removed from the CRS grid in March 2025, and a lot of published calculators were never updated. If another site gives you 50 or 200 points for arranged employment, that site is out of date.',
+    q: 'Why is my score different from another calculator?',
+    a: 'The most common reason is job-offer points. On 25 March 2025 IRCC stopped awarding the CRS bonus for arranged employment — previously 50 or 200 points depending on the occupation. If a calculator still adds points for a job offer, it is applying a rule that no longer exists. You can test that yourself: run any calculator twice with identical answers, changing only the job-offer question. If the total moves, that tool is out of date. Run the same test on ours.',
+  },
+  {
+    q: 'So a job offer counts for nothing now?',
+    a: 'Not quite, and this is a distinction worth getting right. What was removed was the CRS bonus — the score that ranks you inside the Express Entry pool. Arranged employment still earns up to 10 points on the separate Federal Skilled Worker 67-point eligibility grid, which decides whether you qualify at all. A calculator showing "arranged employment — 10 points" on the 67-point grid is correct, not stale. A job offer can also still matter for some provincial streams.',
   },
   {
     q: 'What score do I need?',
@@ -52,10 +69,10 @@ export default async function CrsCalculatorPage() {
         eyebrow={`Free tool · grid checked ${CRS_GRID_VERIFIED_ON}`}
         title={
           <>
-            Express Entry CRS calculator, <span className="text-gold-300">actually up to date</span>
+            Express Entry CRS calculator, <span className="text-gold-300">and how to check it</span>
           </>
         }
-        subtitle="Work out your Comprehensive Ranking System score against the grid as it stands today — including the 2025 changes that a lot of calculators still haven’t caught up with."
+        subtitle="Work out your Comprehensive Ranking System score against the grid as it stands today — then test our arithmetic against IRCC’s own calculator. We will show you how."
       />
 
       <Section tone="paper">
@@ -68,21 +85,35 @@ export default async function CrsCalculatorPage() {
         <div className="mx-auto max-w-3xl">
           <SectionHeading
             eyebrow="What changed"
-            title="Job-offer points are gone"
-            subtitle="In March 2025 IRCC removed the points previously awarded for arranged employment. A great many calculators online never updated."
+            title="The CRS bonus for a job offer was removed"
+            subtitle="On 25 March 2025 IRCC stopped awarding the arranged-employment bonus — previously 50 or 200 points depending on the occupation."
           />
           <div className="mt-8 space-y-4 leading-relaxed text-ink-600 text-pretty">
             <p>
-              If you have been told your score is comfortably above the cut-off because of a
-              job offer, check it again here. People have paid for LMIA-backed offers on the
-              strength of points that no longer exist — which is an expensive way to find out
-              a website was stale.
+              If you have been told your score sits comfortably above the cut-off because of
+              a job offer, it is worth recalculating. People have paid real money for
+              LMIA-backed offers partly for points that no longer apply to the CRS.
             </p>
             <p>
-              The grid also moves in quieter ways. IRCC can change it through ministerial
-              instructions with very little notice, so we date every check rather than
-              claiming the page is permanently current.
+              Be careful with the opposite mistake too. A job offer was not deleted from
+              Canadian immigration scoring altogether — it still earns up to 10 points on the
+              Federal Skilled Worker 67-point eligibility grid, and it can still matter for
+              some provincial streams. Only the CRS bonus went.
             </p>
+            <p>
+              IRCC called the removal temporary and has not set an end date. It has since
+              signalled an interest in reintroducing job-offer points for high-wage
+              occupations only, and consulted on it in 2026 — but nothing is settled: no
+              values, no date, and any change has to appear in the Canada Gazette first. We
+              would not plan around the points coming back.
+            </p>
+          </div>
+          <div className="mt-8">
+            <Callout title="How to test any CRS calculator, including this one">
+              Run it twice with identical answers, changing only the job-offer question. If
+              your total moves, that tool is still applying a rule IRCC removed in March 2025.
+              Do it to ours. We would rather you checked than trusted us.
+            </Callout>
           </div>
           <div className="mt-8">
             <Callout title="Where the points actually are">
