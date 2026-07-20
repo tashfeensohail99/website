@@ -120,6 +120,8 @@ export const ROUTES: Route[] = [
 
   { path: '/tools/clb-converter', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
 
+  { path: '/tools/fsw-67-calculator', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
   // Boilerplate to a crawler, but they must exist and be reachable.
   { path: '/privacy', reviewed: '2026-07-17', priority: 0.3, changeFrequency: 'yearly' },
   { path: '/terms', reviewed: '2026-07-17', priority: 0.3, changeFrequency: 'yearly' },

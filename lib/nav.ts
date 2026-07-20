@@ -195,7 +195,7 @@ export const NAV: NavGroup[] = [
         heading: 'Calculators',
         items: [
           { href: '/tools/crs-calculator', label: 'Express Entry CRS calculator', status: 'live' },
-          { href: '/tools/fsw-67-calculator', label: 'FSW 67-point calculator', status: 'planned' },
+          { href: '/tools/fsw-67-calculator', label: 'FSW 67-point calculator', status: 'live' },
           { href: '/tools/citizenship-calculator', label: 'Citizenship residency calculator', status: 'planned' },
           { href: '/tools/clb-converter', label: 'Language score to CLB converter', status: 'live' },
         ],

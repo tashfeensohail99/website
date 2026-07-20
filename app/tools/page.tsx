@@ -52,6 +52,14 @@ const TOOLS = [
     body: 'Turn an IELTS, CELPIP, PTE, TEF or TCF result into the benchmark levels Canada actually uses — ability by ability, since the lowest one is what gates you.',
     cta: 'Convert my scores',
   },
+  {
+    href: '/tools/fsw-67-calculator',
+    icon: 'scale' as const,
+    kicker: 'Canada · Express Entry',
+    title: 'FSW 67-point eligibility test',
+    body: 'The pass/fail grid that decides whether the Federal Skilled Worker class is open to you at all — which is not the same as your CRS score.',
+    cta: 'Check the pass mark',
+  },
 ];
 
 export default function ToolsPage() {
