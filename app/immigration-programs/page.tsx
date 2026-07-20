@@ -162,7 +162,7 @@ export default function ImmigrationProgramsPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Find out which route fits — free
           <span aria-hidden="true">→</span>
         </Link>
         <Link href="/fees" className="btn btn-ghost">

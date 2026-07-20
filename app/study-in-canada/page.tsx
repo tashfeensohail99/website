@@ -238,7 +238,7 @@ export default function StudyInCanadaPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk through your study plan — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

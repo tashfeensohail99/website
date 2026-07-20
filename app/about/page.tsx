@@ -84,12 +84,12 @@ const FAQS: { q: string; a: ReactNode }[] = [
     ),
   },
   {
-    q: 'What does a consultation cost, and is it refundable?',
+    q: 'What does a consultation cost?',
     a: (
       <>
-        A consultation is PKR {site.consultFee.amount.toLocaleString()}. It’s credited to your
-        service fee if you decide to go ahead, so you only ever pay it once. Either way you leave
-        knowing where you actually stand.
+        Nothing. It used to be PKR 5,000, credited against your service fee — we dropped it because
+        it put a price on the question itself. You leave with a written summary of where you stand,
+        and you pay nothing unless you decide to go ahead.
       </>
     ),
   },
@@ -119,7 +119,7 @@ export default function AboutPage() {
         subtitle="You have almost certainly heard about someone losing their savings to an immigration agent. That fear is reasonable — so rather than ask you to trust us, we’ll give you things you can check."
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta
@@ -245,9 +245,9 @@ export default function AboutPage() {
             desc: 'A firm in Pakistan with an office in Canada — so a Canadian file is handled where it lands.',
           },
           {
-            big: `PKR ${site.consultFee.amount.toLocaleString()}`,
+            big: 'Free',
             label: 'consultation',
-            desc: 'Credited to your fee if you go ahead. An honest answer either way.',
+            desc: 'And our read in writing — an honest answer either way.',
           },
         ]}
       />
@@ -344,7 +344,7 @@ export default function AboutPage() {
       <CTASection
         eyebrow="Start with a conversation"
         title="Find out where you actually stand"
-        subtitle={`A paid consultation, PKR ${site.consultFee.amount.toLocaleString()}, credited to your fee if you go ahead. You leave knowing whether it’s worth applying — from a lawyer, not a salesperson.`}
+        subtitle="The consultation is free, and you leave with a written summary of where you stand — from a lawyer, not a salesperson."
         page="about-cta"
         waMessage="Hi, I’d like to book a consultation."
       />

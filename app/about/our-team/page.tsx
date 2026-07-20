@@ -42,7 +42,7 @@ export default function TeamPage() {
         subtitle="Most immigration firms in Pakistan won’t tell you who is working on your file. Here are ours, by name — so you can check us out before you trust us with anything."
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta
@@ -198,8 +198,7 @@ export default function TeamPage() {
             </p>
             <p className="mt-5">
               <Link href="/book-consultation" className="font-semibold text-accent-500 link-underline">
-                Book a consultation — PKR {site.consultFee.amount.toLocaleString()}, credited to your
-                fee →
+                Talk to a lawyer — free, and in writing →
               </Link>
             </p>
           </Callout>
@@ -210,7 +209,7 @@ export default function TeamPage() {
       <CTASection
         eyebrow="Start with a conversation"
         title="Ask us who will handle your case"
-        subtitle={`A paid consultation, PKR ${site.consultFee.amount.toLocaleString()}, credited to your fee if you go ahead — and an honest answer either way, from a lawyer, not a salesperson.`}
+        subtitle="The consultation is free, and you leave with a written summary of where you stand — an honest answer either way, from a lawyer, not a salesperson."
         page="our-team-cta"
         waMessage="Hi, I’d like to book a consultation and ask who would handle my case."
       />

@@ -159,7 +159,7 @@ export default function EuropePage() {
           Ask about Europe
         </WhatsAppCta>
         <Link href="/book-consultation" className="btn btn-ghost-light">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

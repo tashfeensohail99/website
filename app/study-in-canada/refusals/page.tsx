@@ -143,7 +143,7 @@ export default function StudyPermitRefusalsPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Have your refusal read — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

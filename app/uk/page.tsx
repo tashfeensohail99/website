@@ -123,7 +123,7 @@ export default function UkPage() {
         subtitle="The UK got substantially harder in 2025. Two of the routes most heavily advertised in Pakistan don’t work the way they’re being sold."
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta

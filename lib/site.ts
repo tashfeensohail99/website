@@ -28,8 +28,38 @@ export const site = {
    */
   whatsappNumberFallback: process.env.NEXT_PUBLIC_WA_NUMBER ?? '',
 
-  /** The paid consultation. Creditable against the service fee if they proceed. */
-  consultFee: { amount: 5000, currency: 'PKR', creditable: true },
+  /**
+   * The consultation is FREE. It was PKR 5,000 and creditable until 2026-07-21.
+   *
+   * Removing it took the site's honesty argument with it. The old copy read:
+   * "a firm that earns nothing until you sign has every reason to tell you that
+   * you qualify" — which, once the fee is gone, describes us. So the anchor had
+   * to move from money to something else we can actually be held to.
+   *
+   * It is now a WRITTEN SUMMARY OF WHERE YOU STAND, given before money is
+   * discussed. Deliberately a summary and not "we'll put the no in writing":
+   * a real answer is often "not yet" or "depends what your documents show", and
+   * promising a clean no would turn every honest maybe into a broken promise
+   * the client holds in a WhatsApp thread — and a representation a regulator
+   * could test us against.
+   *
+   * Two phrasings are BANNED anywhere on this site, for reasons that cost more
+   * than they look:
+   *   - "find out if you qualify" / "check your eligibility" — implies WE make
+   *     the determination. A visa officer does. It also contradicts
+   *     /no-guarantee-policy.
+   *   - "book your FREE consultation!" — the literal register of the scam ads
+   *     this audience has been warned about. Free has to read as confident,
+   *     not as bait.
+   */
+  consult: {
+    free: true,
+    /** One-liner for hero subtitles and CTA subheads. */
+    promise: 'A free consultation, and a written summary of where you stand.',
+    /** What "free" actually costs them. Never let free imply no effort. */
+    costsYou:
+      'It costs you an hour and straight answers about your own history — including anything that has gone wrong before. Nothing else.',
+  },
 
   /**
    * Real, visitable offices. Three of them, on two continents — this is the

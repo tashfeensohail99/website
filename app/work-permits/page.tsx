@@ -144,7 +144,7 @@ export default function WorkPermitsPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
         <Link href="/tools/work-permit-eligibility" className="btn btn-ghost">

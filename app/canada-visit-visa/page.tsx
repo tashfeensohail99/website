@@ -169,7 +169,7 @@ export default function VisitVisaPage() {
           Ask about a visit visa
         </WhatsAppCta>
         <Link href="/book-consultation" className="btn btn-ghost-light">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>
@@ -335,7 +335,7 @@ export default function VisitVisaPage() {
       <CTASection
         eyebrow="Tell us about your trip"
         title="Where you’re going, why, and who’s paying"
-        subtitle={`And whether you’ve ever been refused — by any country. That last one changes everything. A consultation is PKR ${site.consultFee.amount.toLocaleString()}, credited to your fee if you go ahead.`}
+        subtitle="And whether you’ve ever been refused — by any country. That last one changes everything. The consultation is free, and you leave with our read in writing."
         page={PAGE}
         waMessage="Hi, I’d like to apply for a Canada visit visa."
       />

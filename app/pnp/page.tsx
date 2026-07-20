@@ -205,7 +205,7 @@ export default function PnpPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Find the right province — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

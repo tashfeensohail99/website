@@ -78,7 +78,7 @@ export default function FeesPage() {
         subtitle="Most firms won’t put a number on a page. Here’s ours, and — more importantly — here’s which part of your money we keep and which part goes to a government."
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Ask what your case would cost
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta
@@ -96,10 +96,12 @@ export default function FeesPage() {
       {/* ===================== THE ONE REAL NUMBER ===================== */}
       <Section tone="paper">
         <div className="mx-auto max-w-3xl">
-          <Callout title={`The consultation: PKR ${site.consultFee.amount.toLocaleString()}`}>
+          <Callout title="The consultation costs nothing">
             <p>
-              Credited against your fee if you go ahead. If we tell you not to apply, that’s what the
-              fee bought — an honest answer, and a refusal you didn’t put on your record.
+              We used to charge PKR 5,000 for it. The reasoning was sound — a firm that earns nothing
+              until you sign has every reason to tell you that you qualify — but it also put a price
+              on the question itself. So the fee is gone, and what replaces it is written down
+              instead of paid for: a summary of where you stand, before money is discussed.
             </p>
             <p className="mt-5">
               <Link href="/book-consultation" className="font-semibold text-accent-500 link-underline">
@@ -232,7 +234,7 @@ export default function FeesPage() {
               Ask about fees
             </WhatsAppCta>
             <Link href="/book-consultation" className="btn btn-gold">
-              Book a consultation — PKR {site.consultFee.amount.toLocaleString()}
+              Ask what your case would cost
               <span aria-hidden="true">→</span>
             </Link>
           </div>

@@ -218,7 +218,7 @@ export default function ExpressEntryPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Have your profile checked — free
           <span aria-hidden="true">→</span>
         </Link>
         <Link href="/tools/crs-calculator" className="btn btn-ghost">

@@ -167,7 +167,7 @@ export default function ProofOfFundsPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

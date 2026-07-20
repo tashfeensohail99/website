@@ -57,13 +57,13 @@ export default function HomePage() {
             <span className="text-gold-300">real lawyers.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-200 text-pretty">
-            Offices in Pakistan and Canada. We’ll tell you honestly whether you qualify — before you
-            pay us anything.
+            Offices in Pakistan and Canada. The consultation is free, and you leave with a written
+            summary of where you actually stand — including if the honest answer is don’t apply.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link href="/book-consultation" className="btn btn-gold">
-              Book a consultation
+              Talk to a lawyer — free
               <span aria-hidden="true">→</span>
             </Link>
             <WhatsAppCta
@@ -75,7 +75,7 @@ export default function HomePage() {
                 message: 'Hi, I’d like to ask about immigrating to Canada.',
               }}
             >
-              Message us on WhatsApp
+              Start on WhatsApp
             </WhatsAppCta>
           </div>
 
@@ -84,7 +84,7 @@ export default function HomePage() {
             {[
               ['Two continents', 'Offices in Pakistan & Canada'],
               ['Lawyer-led', 'Every case reviewed by counsel'],
-              ['No false hope', 'We say no before you pay'],
+              ['No false hope', 'We’ll tell you not to apply'],
             ].map(([h, s]) => (
               <div key={h} className="bg-ink-950/30 px-5 py-5">
                 <p className="font-serif text-lg text-white">{h}</p>
@@ -256,13 +256,13 @@ export default function HomePage() {
             Find out where you actually stand
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-ink-200 text-pretty">
-            A paid consultation, PKR {site.consultFee.amount.toLocaleString()}, credited to your fee
-            if you go ahead. You leave knowing whether it’s worth applying — from a lawyer, not a
-            salesperson.
+            The consultation is free. You leave with a written summary of where you stand — what is
+            realistically open to you, what isn’t, and what we’d need to see before anyone can say
+            more. From a lawyer, not a salesperson.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <Link href="/book-consultation" className="btn btn-gold">
-              Book a consultation
+              Talk to a lawyer — free
               <span aria-hidden="true">→</span>
             </Link>
             <WhatsAppCta

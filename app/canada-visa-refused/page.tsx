@@ -193,7 +193,7 @@ export default function VisaRefusedPage() {
           Send your refusal letter
         </WhatsAppCta>
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Have your refusal read — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>
@@ -400,7 +400,7 @@ export default function VisaRefusedPage() {
               Send your refusal letter
             </WhatsAppCta>
             <Link href="/book-consultation" className="btn btn-gold">
-              Book a consultation — PKR {site.consultFee.amount.toLocaleString()}
+              Have your refusal read — free
               <span aria-hidden="true">→</span>
             </Link>
           </div>

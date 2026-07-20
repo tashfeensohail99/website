@@ -15,7 +15,8 @@ import {
 import { site, SERVICE } from '@/lib/site';
 
 /**
- * The paid consultation.
+ * The consultation. Free since 2026-07-21 — see lib/site.ts for why the
+ * honesty anchor moved from the fee to a written summary.
  *
  * The fee's job is QUALIFICATION, not revenue. A small paid step is the cheapest
  * filter there is between a serious enquiry and the WhatsApp firehose, and — for
@@ -31,7 +32,7 @@ import { site, SERVICE } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Book a Consultation',
   description:
-    'A paid consultation with a qualified lawyer, credited against your fee if you proceed. You will leave knowing whether you have a case — even if the answer is no.',
+    'A free consultation with a qualified lawyer, and a written summary of where you stand — even when that summary says do not apply.',
   alternates: { canonical: '/book-consultation' },
 };
 
@@ -93,12 +94,12 @@ export default function BookConsultationPage() {
   return (
     <>
       <PageHero
-        eyebrow="Book a consultation"
+        eyebrow="Free consultation"
         title="Find out where you actually stand"
         subtitle={
           <>
-            PKR {site.consultFee.amount.toLocaleString()}, credited against your fee if you go ahead.
-            You’ll leave knowing whether you have a case — even if the answer is no.
+            Free, and you leave with a written summary of where you stand — even when that
+            summary says don’t apply.
           </>
         }
       >
@@ -110,7 +111,7 @@ export default function BookConsultationPage() {
             message: 'Hi, I’d like to book a consultation.',
           }}
         >
-          Book on WhatsApp
+          Start on WhatsApp
         </WhatsAppCta>
         <Link href="/about/our-team" className="btn btn-ghost-light">
           See who you’ll speak to
@@ -139,25 +140,28 @@ export default function BookConsultationPage() {
       <Section tone="paper">
         <SectionHeading
           eyebrow="The honest bit"
-          title="Why we charge for it"
-          subtitle="Free consultations aren’t free — they’re paid for by the people who get talked into applying when they shouldn’t."
+          title="Why it costs nothing"
+          subtitle="We used to charge PKR 5,000 for this. The reasoning was sound — it just put a price on the question itself."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-5 lg:items-start">
           <div className="space-y-5 lg:col-span-3">
             <p className="text-ink-600 text-pretty">
-              A firm that earns nothing until you sign has every reason to tell you that you qualify.
-              We’d rather charge a small fee, give you an honest answer, and put it toward your file
-              if you proceed.
+              The old argument was a fair one: a firm that earns nothing until you sign has every
+              reason to tell you that you qualify. We are not going to pretend that problem
+              disappeared when the fee did. So the answer is written down instead of paid for.
             </p>
             <p className="text-ink-600 text-pretty">
-              If we tell you not to apply, the fee is what we earned for saving you a refusal on your
-              record — and those stay with you for years.
+              You get our read on your case in writing — what looks realistically open to you, what
+              doesn’t, and what we would need to see before anyone can say more. It goes in the same
+              WhatsApp thread you keep, before money is discussed. You don’t have to take our word
+              for how honest we are; you’ll have it in text, and you’re free to have anyone else
+              check it.
             </p>
           </div>
           <div className="lg:col-span-2">
-            <Callout title="It credits back in full">
-              Go ahead with your file and the PKR {site.consultFee.amount.toLocaleString()} comes
-              straight off your bill. The fee is a filter, not a toll.
+            <Callout title="What it costs you">
+              {site.consult.costsYou} If you go ahead afterwards, the work is paid — and you’ll know
+              the price before you commit to anything.
             </Callout>
           </div>
         </div>
@@ -166,9 +170,9 @@ export default function BookConsultationPage() {
       <StatBand
         items={[
           {
-            big: `PKR ${site.consultFee.amount.toLocaleString()}`,
+            big: 'Free',
             label: 'consultation',
-            desc: 'Credited against your fee if you go ahead. An honest answer either way.',
+            desc: 'And a written summary of where you stand, before money is discussed.',
           },
           {
             big: 'A name & a number',

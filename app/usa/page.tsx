@@ -182,7 +182,7 @@ export default function UsaPage() {
         subtitle="Two things are true at the same time, and almost nobody separates them properly. Start here before you spend anything."
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk to a lawyer — free
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta
@@ -343,7 +343,7 @@ export default function UsaPage() {
               Ask about a US visa
             </WhatsAppCta>
             <Link href="/book-consultation" className="btn btn-navy">
-              Book a consultation
+              Talk to a lawyer — free
             </Link>
           </div>
         </div>

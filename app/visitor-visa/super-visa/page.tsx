@@ -172,7 +172,7 @@ export default function SuperVisaPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk through a Super Visa — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

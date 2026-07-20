@@ -146,7 +146,7 @@ export default function BusinessImmigrationPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk through your business — free
           <span aria-hidden="true">→</span>
         </Link>
       </PageHero>

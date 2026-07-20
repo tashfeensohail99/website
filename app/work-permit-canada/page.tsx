@@ -150,7 +150,7 @@ export default function WorkPermitPage() {
         }
       >
         <Link href="/book-consultation" className="btn btn-gold">
-          Book a consultation
+          Talk through your business — free
           <span aria-hidden="true">→</span>
         </Link>
         <WhatsAppCta
@@ -180,9 +180,9 @@ export default function WorkPermitPage() {
             desc: 'We have an office in Mississauga — not just a Pakistan shop filing a Canadian case blind.',
           },
           {
-            big: `PKR ${site.consultFee.amount.toLocaleString()}`,
+            big: 'Free',
             label: 'consultation',
-            desc: 'Credited to your fee if you proceed. You leave with an honest answer either way.',
+            desc: 'You leave with our read in writing — an honest answer either way.',
           },
         ]}
       />
@@ -345,9 +345,9 @@ export default function WorkPermitPage() {
       </Section>
 
       <CTASection
-        eyebrow="Find out if you qualify"
+        eyebrow="Where you actually stand"
         title="See whether a C11 is realistic for you"
-        subtitle={`Tell us about your business and your funds and we’ll tell you honestly whether this route fits — and if it doesn’t, what does. A consultation is PKR ${site.consultFee.amount.toLocaleString()}, credited to your fee if you go ahead.`}
+        subtitle="Tell us about your business and your funds and we’ll tell you honestly whether this route fits — and if it doesn’t, what does. The consultation is free, and you get our read in writing."
         page={PAGE}
         waMessage="Hi, I’d like to apply for a Canada work permit without a job offer. I run my own business."
       />
