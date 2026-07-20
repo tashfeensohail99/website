@@ -50,6 +50,29 @@ export const ROUTES: Route[] = [
   // grid by ministerial instruction, so this page genuinely does need re-checking.
   { path: '/tools/crs-calculator', reviewed: '2026-07-20', priority: 0.9, changeFrequency: 'weekly' },
 
+  // ── Programme coverage ──────────────────────────────────────────────────
+  // Broad by design. Someone arriving with a spousal sponsorship question should
+  // find a spousal sponsorship page whether or not that is this month's busy
+  // service — see the note at the top of lib/nav.ts.
+  { path: '/immigration-programs', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/express-entry', reviewed: '2026-07-20', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/express-entry/federal-skilled-worker', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/express-entry/canadian-experience-class', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/express-entry/federal-skilled-trades', reviewed: '2026-07-20', priority: 0.7, changeFrequency: 'monthly' },
+  { path: '/pnp', reviewed: '2026-07-20', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/family-sponsorship', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
+  { path: '/study-in-canada', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
+  { path: '/work-permits', reviewed: '2026-07-20', priority: 0.9, changeFrequency: 'monthly' },
+  { path: '/work-permits/lmia', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/work-permits/lmia-exempt', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
+  { path: '/visitor-visa', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+  { path: '/visitor-visa/super-visa', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
+  { path: '/refusals/gcms-notes', reviewed: '2026-07-20', priority: 0.8, changeFrequency: 'monthly' },
+
   // Boilerplate to a crawler, but they must exist and be reachable.
   { path: '/privacy', reviewed: '2026-07-17', priority: 0.3, changeFrequency: 'yearly' },
   { path: '/terms', reviewed: '2026-07-17', priority: 0.3, changeFrequency: 'yearly' },

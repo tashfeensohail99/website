@@ -6,6 +6,7 @@ import '../styles/globals.css';
 import { site } from '@/lib/site';
 import { Logo } from '@/components/Logo';
 import { StructuredData } from '@/components/StructuredData';
+import { SiteHeader } from '@/components/SiteHeader';
 import { getWhatsAppChannel } from '@/lib/wa-channel';
 
 /* Premium type pairing: Fraunces (a modern, high-contrast serif) for display,
@@ -31,16 +32,6 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-const NAV = [
-  { href: '/work-permit-canada', label: 'Canada' },
-  { href: '/usa', label: 'USA' },
-  { href: '/uk', label: 'UK' },
-  { href: '/europe', label: 'Europe' },
-  { href: '/canada-visa-refused', label: 'Visa Refused' },
-  { href: '/tools', label: 'Free Tools' },
-  { href: '/about', label: 'About' },
-];
-
 export default async function RootLayout({ children }: { children: ReactNode }) {
   // The one number the firm publishes, read from the CRM's ACTIVE channel at build time.
   const { display, digits } = await getWhatsAppChannel();
@@ -58,56 +49,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
           Skip to content
         </a>
 
-        {/* Utility bar — contact + the free-tool entry point. Scrolls away; the nav sticks. */}
-        <div className="bg-ink-950 text-ink-300">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-2 text-xs">
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-              {digits ? (
-                <a
-                  href={`https://wa.me/${digits}`}
-                  rel="noopener"
-                  className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5" fill="currentColor">
-                    <path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2.1 22l5.34-1.4a9.83 9.83 0 0 0 4.6 1.17c5.43 0 9.85-4.42 9.85-9.86 0-2.63-1.02-5.11-2.88-6.97A9.79 9.79 0 0 0 12.04 2z" />
-                  </svg>
-                  {display || 'Message us on WhatsApp'}
-                </a>
-              ) : null}
-              <span className="hidden sm:inline">Lahore · Islamabad · Mississauga</span>
-            </div>
-            <Link
-              href="/tools"
-              className="font-semibold text-gold-300 transition-colors hover:text-gold-400"
-            >
-              Free eligibility check →
-            </Link>
-          </div>
-        </div>
-
-        {/* Sticky glass header */}
-        <header className="sticky top-0 z-50 border-b border-rule/70 bg-paper/80 backdrop-blur-md">
-          <nav className="mx-auto flex max-w-6xl items-center px-4 py-3">
-            <Link href="/" className="mr-auto" aria-label="Tashfeen Immigration Solutions — home">
-              <Logo variant="dark" />
-            </Link>
-            <ul className="mr-7 hidden items-center gap-x-7 lg:flex">
-              {NAV.map((n) => (
-                <li key={n.href}>
-                  <Link
-                    href={n.href}
-                    className="link-underline text-sm font-medium text-ink-600 transition-colors hover:text-ink-900"
-                  >
-                    {n.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link href="/book-consultation" className="btn btn-gold !px-5 !py-2.5 text-sm">
-              Book Consultation
-            </Link>
-          </nav>
-        </header>
+        <SiteHeader display={display} digits={digits} />
 
         <main id="main">{children}</main>
 
