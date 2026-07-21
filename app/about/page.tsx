@@ -208,6 +208,19 @@ export default function AboutPage() {
                 </p>
               )}
               {o.hours ? <p className="mt-4 text-sm text-ink-400">{o.hours}</p> : null}
+              {/* The phone was already being emitted to Google as schema.org
+                  `telephone` but never shown to a human — a visitor on this page
+                  could not read the number that search results were quoting.
+                  tel: so a phone dials it on tap rather than making someone
+                  copy digits by hand. */}
+              {o.phone ? (
+                <a
+                  href={`tel:${o.phone.replace(/\s/g, '')}`}
+                  className="mt-2 inline-block text-sm font-semibold text-ink-700 transition-colors hover:text-gold-600"
+                >
+                  {o.phone}
+                </a>
+              ) : null}
               {o.mapUrl ? (
                 <a
                   href={o.mapUrl}

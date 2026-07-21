@@ -24,6 +24,48 @@ import { site, lawyers } from '@/lib/site';
  * half-empty: incomplete NAP is worse than absent NAP, because it splits the
  * local signal instead of simply not making one.
  */
+/**
+ * Opening hours as STRUCTURED data, not just the prose rendered on /about.
+ * This is what produces "Open now · Closes 6 pm" in a Google result and in
+ * Maps; a human-readable string alone produces nothing.
+ *
+ * Parsed from the office's own `hours` string so the two can never drift apart,
+ * but deliberately NARROW: it only understands the "Monday to Saturday,
+ * 9 am – 6 pm" shape both offices currently use. Anything else returns nothing
+ * rather than guessing, because wrong hours in Maps send a real person to a
+ * closed door — strictly worse than no hours at all.
+ */
+const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+function openingHours(hours: string): Record<string, unknown> {
+  const m = hours.match(
+    /^(\w+) to (\w+),\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)\s*[–-]\s*(\d{1,2})(?::(\d{2}))?\s*(am|pm)$/i,
+  );
+  if (!m) return {};
+
+  const [, fromDay, toDay, oh, om, oMer, ch, cm, cMer] = m;
+  const from = DAYS.indexOf(fromDay);
+  const to = DAYS.indexOf(toDay);
+  if (from < 0 || to < 0 || to < from) return {};
+
+  const to24 = (h: string, mer: string) => {
+    const n = parseInt(h, 10) % 12;
+    return mer.toLowerCase() === 'pm' ? n + 12 : n;
+  };
+  const t = (h: number, mm?: string) => `${String(h).padStart(2, '0')}:${mm ?? '00'}`;
+
+  return {
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: DAYS.slice(from, to + 1),
+        opens: t(to24(oh, oMer), om),
+        closes: t(to24(ch, cMer), cm),
+      },
+    ],
+  };
+}
+
 export function StructuredData() {
   const offices = site.offices.filter((o) => o.address);
 
@@ -70,6 +112,7 @@ export function StructuredData() {
       },
       ...(o.phone ? { telephone: o.phone } : {}),
       ...(o.mapUrl ? { hasMap: o.mapUrl } : {}),
+      ...openingHours(o.hours),
     })),
   ];
 

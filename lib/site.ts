@@ -68,15 +68,28 @@ export const site = {
    *
    * One canonical address string per office. It must match Google Business
    * Profile character-for-character or the local-SEO signal splits.
+   *
+   * PHONE: both Pakistan offices publish the SAME number, and it is also the
+   * WhatsApp number the header fetches from the CRM at build time. It is
+   * hardcoded here rather than derived, which means switching the active
+   * WhatsAppChannel in the admin panel will NOT update it — if that number ever
+   * changes, this file has to change too. Accepted deliberately: an office
+   * line is a property of the office, not of whichever channel is active.
+   *
+   * MAP LINKS: share.google short links, resolved 2026-07-21 to confirm they
+   * are not swapped — the Lahore link resolves to "DHA Haly Tower" (matching
+   * the Lahore address) and the Islamabad link to the "Tashfeen Barristers and
+   * Solicitors" profile. They are opaque, so re-check them if either office
+   * moves; a stale one fails silently.
    */
   offices: [
     {
       city: 'Lahore',
       country: 'Pakistan',
       address: 'Office #201 & 202, 2nd Floor, HALY TOWER, Sector R, DHA Phase 2, Lahore',
-      hours: '', // TODO(tashfeen)
-      phone: '', // TODO(tashfeen)
-      mapUrl: '', // TODO(tashfeen) — Google Business Profile link
+      hours: 'Monday to Saturday, 9 am – 6 pm',
+      phone: '+92 335 000 1111',
+      mapUrl: 'https://share.google/gtClNV4K8xnskwPqS',
     },
     {
       city: 'Islamabad',
@@ -89,9 +102,9 @@ export const site = {
       // instead of reinforcing it.
       address:
         'Office 3029B, 3rd Floor, World Trade Centre, Giga Mall, Sector F, DHA Phase 2, Islamabad 45730',
-      hours: '', // TODO(tashfeen)
-      phone: '', // TODO(tashfeen)
-      mapUrl: '', // TODO(tashfeen) — Google Business Profile link
+      hours: 'Monday to Saturday, 9 am – 6 pm',
+      phone: '+92 335 000 1111',
+      mapUrl: 'https://share.google/ceGjVWMzhtxhtq60o',
     },
     {
       city: 'Mississauga',
