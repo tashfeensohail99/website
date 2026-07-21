@@ -154,7 +154,7 @@ export default function TeamPage() {
                   {l.verifyUrl ? (
                     <a
                       href={l.verifyUrl}
-                      className="mt-4 inline-block text-sm font-semibold text-accent-500 link-underline"
+                      className="mt-4 tap text-sm font-semibold text-accent-500 link-underline"
                       rel="noopener nofollow"
                       target="_blank"
                     >

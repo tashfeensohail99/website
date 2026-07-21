@@ -188,7 +188,7 @@ export function LeadForm({ page = 'contact' }: { page?: string }) {
           required
           value={refused}
           onChange={(e) => setRefused(e.target.value)}
-          className="mt-3 w-full rounded-xl border border-rule bg-paper px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
+          className="mt-3 w-full rounded-xl border border-rule bg-paper min-h-11 px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
         >
           <option value="">Select…</option>
           {REFUSED.map((r) => (
@@ -208,7 +208,7 @@ export function LeadForm({ page = 'contact' }: { page?: string }) {
               name="refusalDetail"
               maxLength={200}
               placeholder="Canada, 2024, insufficient ties to home country"
-              className="mt-2 w-full rounded-xl border border-rule bg-paper px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
+              className="mt-2 w-full rounded-xl border border-rule bg-paper min-h-11 px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
             />
           </div>
         ) : null}
@@ -275,7 +275,7 @@ function Select({ label, name, options }: { label: string; name: string; options
       <select
         id={name}
         name={name}
-        className="mt-2 w-full rounded-xl border border-rule bg-paper px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
+        className="mt-2 w-full rounded-xl border border-rule bg-paper min-h-11 px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
       >
         <option value="">Select…</option>
         {options.map((o) => (
@@ -303,7 +303,7 @@ function Field({
         id={name}
         name={name}
         {...rest}
-        className="mt-2 w-full rounded-xl border border-rule bg-paper px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
+        className="mt-2 w-full rounded-xl border border-rule bg-paper min-h-11 px-4 py-2.5 text-sm transition-colors focus:border-gold-500 focus:outline-none focus:ring-2 focus:ring-gold-500/20"
       />
       {hint ? <p className="mt-1 text-xs text-ink-400 text-pretty">{hint}</p> : null}
     </div>

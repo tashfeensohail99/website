@@ -113,12 +113,14 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
   return (
     <div>
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-400">{title}</p>
-      <ul className="mt-4 space-y-2.5">
+      {/* space-y drops to 0 because `.tap` supplies the 44px rhythm itself;
+          keeping both would double the gap and make the column sprawl. */}
+      <ul className="mt-2">
         {links.map(([href, label]) => (
           <li key={href}>
             <Link
               href={href}
-              className="text-sm text-ink-300 transition-colors hover:text-white"
+              className="tap text-sm text-ink-300 transition-colors hover:text-white"
             >
               {label}
             </Link>

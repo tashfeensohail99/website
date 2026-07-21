@@ -171,7 +171,7 @@ export default function NoGuaranteePage() {
         </p>
         <Link
           href="/about/our-team"
-          className="mt-6 inline-block font-semibold text-accent-500 link-underline"
+          className="mt-6 tap font-semibold text-accent-500 link-underline"
         >
           See who we are, and check us →
         </Link>

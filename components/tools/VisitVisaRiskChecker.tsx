@@ -206,7 +206,7 @@ export function VisitVisaRiskChecker({ digits }: { digits: string }) {
                 </p>
                 <a
                   href="/canada-visa-refused"
-                  className="mt-3 inline-block text-sm font-semibold text-accent-500 link-underline"
+                  className="mt-3 tap text-sm font-semibold text-accent-500 link-underline"
                 >
                   What to do after a refusal →
                 </a>

@@ -134,7 +134,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/about/our-team"
-            className="mt-3 inline-block shrink-0 font-semibold text-accent-500 link-underline sm:mt-0"
+            className="mt-3 tap shrink-0 font-semibold text-accent-500 link-underline sm:mt-0"
           >
             Meet the team →
           </Link>
@@ -230,7 +230,7 @@ export default function HomePage() {
             </p>
             <Link
               href="/no-guarantee-policy"
-              className="mt-6 inline-block font-semibold text-accent-500 link-underline"
+              className="mt-6 tap font-semibold text-accent-500 link-underline"
             >
               Read our no-guarantee policy →
             </Link>

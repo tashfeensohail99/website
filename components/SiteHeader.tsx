@@ -33,7 +33,7 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
               <a
                 href={`https://wa.me/${digits}`}
                 rel="noopener"
-                className="inline-flex items-center gap-1.5 transition-colors hover:text-white"
+                className="tap inline-flex items-center gap-1.5 transition-colors hover:text-white"
               >
                 <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3.5 w-3.5" fill="currentColor">
                   <path d="M12.04 2C6.6 2 2.18 6.42 2.18 11.86c0 1.74.46 3.44 1.32 4.94L2.1 22l5.34-1.4a9.83 9.83 0 0 0 4.6 1.17c5.43 0 9.85-4.42 9.85-9.86 0-2.63-1.02-5.11-2.88-6.97A9.79 9.79 0 0 0 12.04 2z" />
@@ -44,10 +44,10 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
             <span className="hidden sm:inline">Lahore · Islamabad · Mississauga</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/tools" className="font-semibold text-gold-300 transition-colors hover:text-gold-400">
+            <Link href="/tools" className="tap font-semibold text-gold-300 transition-colors hover:text-gold-400">
               Free tools
             </Link>
-            <Link href="/book-consultation" className="hidden font-semibold text-white transition-colors hover:text-gold-300 sm:inline">
+            <Link href="/book-consultation" className="tap hidden font-semibold text-white transition-colors hover:text-gold-300 sm:inline-flex">
               Book a consultation
             </Link>
           </div>
@@ -164,7 +164,7 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
               Swapping the label is honest about what actually renders. */}
           <Link
             href="/book-consultation"
-            className="btn btn-gold shrink-0 !px-3.5 !py-2.5 text-sm sm:!px-5"
+            className="btn btn-gold shrink-0 !min-h-11 !px-3.5 text-sm sm:!px-5"
           >
             <span className="hidden sm:inline">Talk to a lawyer — free</span>
             <span className="sm:hidden">Free consult</span>

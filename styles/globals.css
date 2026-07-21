@@ -241,6 +241,21 @@ img, svg { max-width: 100%; height: auto; }
    is the system fix: the surface decides, so the mistake stops being possible.
    Descendant selectors (0,2,0) outrank the base rule (0,1,0), and both are
    unlayered, so no cascade-layer surprises. */
+/* STANDALONE TAP TARGET — 44px, the platform touch floor.
+   Measured at 390px, the footer link columns were 17px tall, the utility-bar
+   links 16px, and the standalone "→" links 26px. On a phone that is a coin-flip
+   between hitting the link and hitting the one under it, and this audience is
+   overwhelmingly on phones.
+   Deliberately NOT applied to inline links inside a sentence: WCAG 2.5.8
+   exempts those, and forcing 44px of leading into running prose would wreck the
+   line rhythm to fix a problem that does not exist there — a word in a
+   paragraph is hit by aiming at the word. */
+.tap {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* The muted text tone has to flip with the surface.
    `--color-ink-400` was darkened to clear AA on the light surfaces where 41 of
    its 42 usages live — but the footer and hero also use `text-ink-400` for
