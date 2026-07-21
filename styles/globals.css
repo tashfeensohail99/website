@@ -1,5 +1,24 @@
 @import 'tailwindcss';
 
+/* THE DESKTOP MENU IS GATED ON POINTER, NOT JUST WIDTH.
+   It used to switch on at `xl` (1280px) on width alone, which caused two
+   distinct failures:
+
+   1. A TOUCH LAPTOP AT 1366px GOT THE HOVER MENU. The dropdown triggers are
+      <button> elements that open on :hover / :focus-within — neither of which a
+      tap produces. Those visitors could not open ANY dropdown. It failed
+      silently: the menu rendered, looked fine, and did nothing.
+   2. A MOUSE LAPTOP AT 1100-1279px got the phone drawer, on a real laptop with
+      plenty of room for the row.
+
+   `hover: hover and pointer: fine` is the actual question being asked — "can
+   this person hover?" — so ask it directly. Width alone never could.
+
+   `nav` is a deliberately separate breakpoint from `xl`: the menu now fits from
+   ~1139px, and tying it to xl would keep pretending the cutover is about the
+   same thing as the page's content grid. */
+@custom-variant desknav (@media (hover: hover) and (pointer: fine) and (width >= 66rem));
+
 /* =========================================================
    Tashfeen Immigration Solutions — premium design system.
 

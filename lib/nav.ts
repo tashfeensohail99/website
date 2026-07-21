@@ -48,7 +48,11 @@ export type NavGroup = {
 
 export const NAV: NavGroup[] = [
   {
-    label: 'Immigration Programs',
+    // "Immigration Programs" was 190px on one line and the single biggest cause
+    // of the header wrapping onto two rows. It also said nothing: every group in
+    // this menu is an immigration programme. "Canada PR" is 107px and names the
+    // outcome the visitor actually wants.
+    label: 'Canada PR',
     href: '/immigration-programs',
     status: 'live',
     columns: [
@@ -78,12 +82,10 @@ export const NAV: NavGroup[] = [
         ],
       },
       {
-        heading: 'Family & other routes',
+        // Family sponsorship used to live here as the third column. It is a
+        // major service and was two hovers deep, so it is now its own group.
+        heading: 'Other permanent routes',
         items: [
-          { href: '/family-sponsorship', label: 'Family sponsorship', status: 'live' },
-          { href: '/family-sponsorship/spouse-partner', label: 'Spouse or partner', status: 'live' },
-          { href: '/family-sponsorship/parents-grandparents', label: 'Parents & grandparents', status: 'live' },
-          { href: '/family-sponsorship/dependent-children', label: 'Dependent children', status: 'live' },
           { href: '/atlantic-immigration-program', label: 'Atlantic Immigration Program', status: 'live' },
           { href: '/rural-community-immigration', label: 'Rural & northern immigration', status: 'live' },
           { href: '/caregivers', label: 'Caregiver routes', status: 'live' },
@@ -95,35 +97,7 @@ export const NAV: NavGroup[] = [
   },
 
   {
-    label: 'Study in Canada',
-    href: '/study-in-canada',
-    status: 'live',
-    columns: [
-      {
-        heading: 'Getting there',
-        items: [
-          { href: '/study-in-canada/study-permit', label: 'Canadian study permit', status: 'live' },
-          { href: '/study-in-canada/provincial-attestation-letter', label: 'Provincial attestation letter', status: 'live' },
-          { href: '/study-in-canada/designated-learning-institutions', label: 'Designated learning institutions', status: 'live' },
-          { href: '/study-in-canada/proof-of-funds', label: 'Proving your funds', status: 'live' },
-          { href: '/study-in-canada/refusals', label: 'Study permit refusals', status: 'live' },
-        ],
-      },
-      {
-        heading: 'While you are there, and after',
-        items: [
-          { href: '/study-in-canada/working-while-studying', label: 'Working while studying', status: 'live' },
-          { href: '/study-in-canada/study-permit-extension', label: 'Extending a study permit', status: 'live' },
-          { href: '/work-permits/post-graduation', label: 'Post-graduation work permit', status: 'live' },
-          { href: '/study-in-canada/bringing-family', label: 'Bringing your family', status: 'live' },
-          { href: '/study-in-canada/study-to-permanent-residence', label: 'From study to permanent residence', status: 'live' },
-        ],
-      },
-    ],
-  },
-
-  {
-    label: 'Work Permits',
+    label: 'Work',
     href: '/work-permits',
     status: 'live',
     columns: [
@@ -151,7 +125,70 @@ export const NAV: NavGroup[] = [
   },
 
   {
-    label: 'Visitor Visa',
+    label: 'Study',
+    href: '/study-in-canada',
+    status: 'live',
+    columns: [
+      {
+        heading: 'Getting there',
+        items: [
+          { href: '/study-in-canada/study-permit', label: 'Canadian study permit', status: 'live' },
+          { href: '/study-in-canada/provincial-attestation-letter', label: 'Provincial attestation letter', status: 'live' },
+          { href: '/study-in-canada/designated-learning-institutions', label: 'Designated learning institutions', status: 'live' },
+          { href: '/study-in-canada/proof-of-funds', label: 'Proving your funds', status: 'live' },
+          { href: '/study-in-canada/refusals', label: 'Study permit refusals', status: 'live' },
+        ],
+      },
+      {
+        heading: 'While you are there, and after',
+        items: [
+          { href: '/study-in-canada/working-while-studying', label: 'Working while studying', status: 'live' },
+          { href: '/study-in-canada/study-permit-extension', label: 'Extending a study permit', status: 'live' },
+          { href: '/work-permits/post-graduation', label: 'Post-graduation work permit', status: 'live' },
+          { href: '/study-in-canada/bringing-family', label: 'Bringing your family', status: 'live' },
+          { href: '/study-in-canada/study-to-permanent-residence', label: 'From study to permanent residence', status: 'live' },
+        ],
+      },
+    ],
+  },
+
+  {
+    // Promoted out of "Immigration Programs" column 3. Sponsorship is a whole
+    // service line and someone arriving to bring their spouse over should not
+    // have to guess that it lives under a generic programmes menu.
+    //
+    // The second column deliberately crosses service boundaries: a person
+    // asking "how do I get my family here" does not know or care that a Super
+    // Visa is a visitor route and a spousal open work permit is a work route.
+    // Those pages are reachable from their home groups too — nothing is moved,
+    // only additionally surfaced where the question is actually asked.
+    label: 'Family',
+    href: '/family-sponsorship',
+    status: 'live',
+    columns: [
+      {
+        heading: 'Sponsor a relative',
+        items: [
+          { href: '/family-sponsorship', label: 'How sponsorship works', status: 'live' },
+          { href: '/family-sponsorship/spouse-partner', label: 'Spouse or partner', status: 'live' },
+          { href: '/family-sponsorship/parents-grandparents', label: 'Parents & grandparents', status: 'live' },
+          { href: '/family-sponsorship/dependent-children', label: 'Dependent children', status: 'live' },
+        ],
+      },
+      {
+        heading: 'Bring family temporarily',
+        items: [
+          { href: '/visitor-visa/super-visa', label: 'Super Visa for parents & grandparents', status: 'live' },
+          { href: '/work-permits/spousal-open-work-permit', label: 'Spousal open work permit', status: 'live' },
+          { href: '/study-in-canada/bringing-family', label: 'Bringing family while you study', status: 'live' },
+          { href: '/visitor-visa/invitation-letter', label: 'Invitation letters', status: 'live' },
+        ],
+      },
+    ],
+  },
+
+  {
+    label: 'Visit',
     href: '/visitor-visa',
     status: 'live',
     columns: [
@@ -213,20 +250,6 @@ export const NAV: NavGroup[] = [
   },
 
   {
-    label: 'Other countries',
-    status: 'live',
-    columns: [
-      {
-        items: [
-          { href: '/usa', label: 'United States', status: 'live' },
-          { href: '/uk', label: 'United Kingdom', status: 'live' },
-          { href: '/europe', label: 'Europe & Schengen', status: 'live' },
-        ],
-      },
-    ],
-  },
-
-  {
     label: 'About',
     href: '/about',
     status: 'live',
@@ -243,6 +266,34 @@ export const NAV: NavGroup[] = [
     ],
   },
 ];
+
+/**
+ * The four destinations the firm actually serves.
+ *
+ * These used to be a nav group called "Other countries", sitting seventh of
+ * eight behind a hover menu, and it was the ONLY group with no landing page of
+ * its own. Meanwhile the homepage hero leads with four flags — Canada, UK, USA,
+ * Europe — so the site promised four destinations and then hid three of them
+ * behind a vague label. That is an information-architecture contradiction, and
+ * no amount of restyling the dropdown would have fixed it.
+ *
+ * So they stop being a menu item you have to find and become the site's SCOPE:
+ * rendered as a persistent strip in the utility bar on every page, and pinned
+ * above the accordion in the mobile drawer.
+ *
+ * Order matches the homepage DestinationGrid deliberately — two surfaces
+ * disagreeing about which countries matter, and in what order, is exactly the
+ * kind of drift that makes a site feel assembled rather than designed.
+ */
+export const DESTINATIONS: NavItem[] = [
+  { href: '/immigration-programs', label: 'Canada', status: 'live' },
+  { href: '/uk', label: 'United Kingdom', status: 'live' },
+  { href: '/usa', label: 'United States', status: 'live' },
+  { href: '/europe', label: 'Europe', status: 'live' },
+];
+
+/** The three non-Canada destinations, for the "Not Canada?" line under each panel. */
+export const OTHER_DESTINATIONS = DESTINATIONS.filter((d) => d.href !== '/immigration-programs');
 
 /**
  * Only what actually exists. The menu never renders a link to a 404.
@@ -267,7 +318,12 @@ export function liveHrefs(): string[] {
     .filter((i) => i.status === 'live')
     .map((i) => i.href);
   const hubs = NAV.filter((g) => g.status === 'live' && g.href).map((g) => g.href!);
-  return [...new Set([...hubs, ...items])].sort();
+  // DESTINATIONS is not part of NAV, so it must be added explicitly. Without
+  // this line, retiring the "Other countries" group would silently drop /usa,
+  // /uk and /europe from the sitemap — three real service pages de-indexed by a
+  // navigation change.
+  const destinations = DESTINATIONS.filter((d) => d.status === 'live').map((d) => d.href);
+  return [...new Set([...hubs, ...items, ...destinations])].sort();
 }
 
 /** The build queue, in order. Useful for tracking how much of the IA is real. */

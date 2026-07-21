@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
 import { MobileNav } from '@/components/MobileNav';
-import { liveNav } from '@/lib/nav';
+import { DestinationBar } from '@/components/DestinationBar';
+import { liveNav, OTHER_DESTINATIONS } from '@/lib/nav';
 
 /**
  * The site header and mega-menu.
@@ -25,9 +26,14 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
 
   return (
     <>
-      {/* Utility bar — contact and the two things people arrive wanting to do. */}
+      {/* Utility bar — the four destinations, then how to reach us.
+          "Free tools" and "Book a consultation" USED to live on the right here.
+          Both were duplicates: Tools is a nav group, and the gold CTA sits
+          40px below this line. Deleting them is what pays for the destination
+          strip, so the bar carries more information at the same weight. */}
       <div className="bg-ink-950 text-ink-300">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-2 text-xs">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-6 gap-y-1 px-4 py-1.5 text-xs">
+          <DestinationBar />
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
             {digits ? (
               <a
@@ -41,15 +47,7 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
                 {display || 'Message us on WhatsApp'}
               </a>
             ) : null}
-            <span className="hidden sm:inline">Lahore · Islamabad · Mississauga</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/tools" className="tap font-semibold text-gold-300 transition-colors hover:text-gold-400">
-              Free tools
-            </Link>
-            <Link href="/book-consultation" className="tap hidden font-semibold text-white transition-colors hover:text-gold-300 sm:inline-flex">
-              Book a consultation
-            </Link>
+            <span className="hidden lg:inline">Lahore · Islamabad · Mississauga</span>
           </div>
         </div>
       </div>
@@ -63,10 +61,15 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
             <Logo variant="dark" />
           </Link>
 
-          <ul className="mr-6 hidden items-center xl:flex">
+          <ul className="mr-3 hidden items-center desknav:flex xl:mr-6">
             {groups.map((g) => {
               const flat = g.columns.flatMap((c) => c.items);
               const single = flat.length === 1 && g.columns.length === 1 && !g.columns[0].heading;
+              /* A one-column group gets an ANCHORED dropdown, not the full-bleed
+                 band. A 1280px-wide panel holding six links looks like a
+                 rendering fault — the band is only justified when there are
+                 enough columns to fill it. */
+              const wide = g.columns.length >= 2;
 
               // A group with exactly one destination is just a link, not a menu.
               if (single) {
@@ -74,7 +77,7 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
                   <li key={g.label}>
                     <Link
                       href={flat[0].href}
-                      className="link-underline block px-3.5 py-2 text-sm font-medium text-ink-600 transition-colors hover:text-ink-900"
+                      className="link-underline block px-2.5 py-2 text-sm font-medium text-ink-600 transition-colors hover:text-ink-900 xl:px-3.5"
                     >
                       {g.label}
                     </Link>
@@ -83,11 +86,11 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
               }
 
               return (
-                <li key={g.label} className="group static">
+                <li key={g.label} className={`group ${wide ? 'static' : 'relative'}`}>
                   <button
                     type="button"
                     aria-haspopup="true"
-                    className="flex items-center gap-1 px-3.5 py-2 text-sm font-medium text-ink-600 transition-colors group-hover:text-ink-900 group-focus-within:text-ink-900"
+                    className="flex items-center gap-1 px-2.5 py-2 text-sm font-medium text-ink-600 transition-colors group-hover:text-ink-900 group-focus-within:text-ink-900 xl:px-3.5"
                   >
                     {g.label}
                     <svg
@@ -103,11 +106,32 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
                     </svg>
                   </button>
 
+                  {/* `top-full` resolves against the containing block, which is
+                      the STICKY header for a `static` li but the ~40px li
+                      itself once the li is `relative`. So the anchored variant
+                      lands 23px too high and its rounded top corners disappear
+                      behind the header (z-50 beats the panel's z-40).
+                      The `pt-6` is on the TRANSPARENT positioner, not the card,
+                      so it doubles as a hover bridge: the pointer can cross the
+                      gap between trigger and card without the menu closing. */}
                   <div
-                    className="invisible absolute left-0 right-0 top-full z-40 opacity-0 transition-[opacity,transform] duration-200 [transform:translateY(-4px)] group-focus-within:visible group-focus-within:opacity-100 group-focus-within:[transform:none] group-hover:visible group-hover:opacity-100 group-hover:[transform:none]"
+                    className={`invisible absolute z-40 opacity-0 transition-[opacity,transform] duration-200 [transform:translateY(-4px)] group-focus-within:visible group-focus-within:opacity-100 group-focus-within:[transform:none] group-hover:visible group-hover:opacity-100 group-hover:[transform:none] ${
+                      wide
+                        ? 'left-0 right-0 top-full'
+                        : 'left-0 top-full w-[19rem] pt-6 last:left-auto last:right-0'
+                    }`}
                   >
-                    <div className="border-b border-rule bg-paper shadow-[0_24px_48px_-24px_rgb(16_24_40/0.25)]">
-                      <div className="mx-auto max-w-7xl px-4 py-8">
+                    {/* The panel is `absolute` inside a `sticky` header, and
+                        sticky is a positioned containing block — so anything
+                        past the viewport bottom would be UNREACHABLE, not
+                        merely clipped. Capping the height makes it scroll
+                        instead of vanish. */}
+                    <div
+                      className={`max-h-[calc(100dvh-7rem)] overflow-y-auto overscroll-contain border-rule bg-paper shadow-[0_24px_48px_-24px_rgb(16_24_40/0.25)] ${
+                        wide ? 'border-b' : 'rounded-xl border'
+                      }`}
+                    >
+                      <div className={wide ? 'mx-auto max-w-7xl px-4 py-8' : 'px-3 py-3'}>
                         <div
                           className={`grid gap-x-10 gap-y-6 ${
                             g.columns.length >= 3 ? 'md:grid-cols-3' : g.columns.length === 2 ? 'md:grid-cols-2' : ''
@@ -139,16 +163,31 @@ export function SiteHeader({ display, digits }: { display: string; digits: strin
                           ))}
                         </div>
 
-                        {g.href ? (
-                          <div className="mt-6 border-t border-rule pt-4">
-                            <Link
-                              href={g.href}
-                              className="text-sm font-semibold text-accent-500 link-underline"
-                            >
+                        {/* The destinations are gone from the top level, so every
+                            panel carries the way out of Canada. Six extra
+                            sitewide paths into /uk, /usa and /europe at zero
+                            horizontal cost — which is the trade that let the
+                            "Other countries" group be retired at all. */}
+                        <div
+                          className={`border-t border-rule ${wide ? 'mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 pt-4' : 'mt-2 px-3 pt-3'}`}
+                        >
+                          {g.href ? (
+                            <Link href={g.href} className="text-sm font-semibold text-accent-500 link-underline">
                               All {g.label.toLowerCase()} →
                             </Link>
-                          </div>
-                        ) : null}
+                          ) : null}
+                          <p className="text-xs text-ink-400">
+                            Not Canada?{' '}
+                            {OTHER_DESTINATIONS.map((d, i) => (
+                              <span key={d.href}>
+                                {i > 0 ? ' · ' : ''}
+                                <Link href={d.href} className="text-ink-600 underline-offset-2 hover:underline">
+                                  {d.label}
+                                </Link>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>

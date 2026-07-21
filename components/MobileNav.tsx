@@ -4,7 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type { NavGroup } from '@/lib/nav';
+import { DESTINATIONS, type NavGroup } from '@/lib/nav';
+import { FlagCanada, FlagUK, FlagUSA, FlagEU } from '@/components/Flags';
+
+/** Same mapping as the desktop DestinationBar; kept local to avoid a shared
+ *  module whose only job would be four key/value pairs. */
+const DRAWER_FLAGS: Record<string, (p: { className?: string }) => React.ReactElement> = {
+  '/immigration-programs': FlagCanada,
+  '/uk': FlagUK,
+  '/usa': FlagUSA,
+  '/europe': FlagEU,
+};
 
 /**
  * The mobile navigation drawer.
@@ -127,7 +137,7 @@ export function MobileNav({
         aria-controls="mobile-nav"
         aria-label="Open menu"
         // 44px minimum — the accessibility floor for a touch target.
-        className="ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-ink-700 transition-colors hover:bg-paper-alt xl:hidden"
+        className="ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-ink-700 transition-colors hover:bg-paper-alt desknav:hidden"
       >
         <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
           <path d="M3 6h18M3 12h18M3 18h18" strokeLinecap="round" />
@@ -142,7 +152,7 @@ export function MobileNav({
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
-          className="fixed inset-0 z-[100] flex flex-col bg-ink-950 text-white xl:hidden"
+          className="fixed inset-0 z-[100] flex flex-col bg-ink-950 text-white desknav:hidden"
         >
           {/* Header row — close sits right, where the thumb already is. */}
           <div className="flex shrink-0 items-center justify-between border-b border-white/10 px-4 py-3">
@@ -160,6 +170,33 @@ export function MobileNav({
                 <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
               </svg>
             </button>
+          </div>
+
+          {/* Destinations FIRST, above the accordion and outside the scroll
+              region. Everything below this is Canada; someone who came for the
+              UK or the US should not have to scroll past Express Entry and ten
+              provincial programmes to discover the firm serves them at all.
+              This audience is overwhelmingly on phones, so this is the surface
+              where burying those three pages cost the most. */}
+          <div className="shrink-0 border-b border-white/10 px-4 py-3">
+            <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-gold-300">
+              Where are you going?
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {DESTINATIONS.map((d) => {
+                const Flag = DRAWER_FLAGS[d.href];
+                return (
+                  <Link
+                    key={d.href}
+                    href={d.href}
+                    className="tap flex items-center gap-2.5 rounded-xl border border-white/15 bg-white/[0.06] px-3 text-sm text-white transition-colors hover:bg-white/[0.12]"
+                  >
+                    {Flag ? <Flag className="h-4 w-auto shrink-0 rounded-[2px] ring-1 ring-white/25" /> : null}
+                    <span className="min-w-0 truncate">{d.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           {/* Only this region scrolls, so the pinned actions never move. */}
