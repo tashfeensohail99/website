@@ -180,7 +180,7 @@ export default function HomePage() {
           {[
             ['3', 'offices', 'Lahore, Islamabad & Mississauga — real doors, not a mailbox.'],
             ['4', 'destinations', 'Canada, the USA, the UK and Europe — one firm, checked facts.'],
-            ['PKR 5,000', 'consultation', 'Credited to your fee if you go ahead. Honest answer either way.'],
+            ['Free', 'consultation', 'And a written summary of where you stand, before money is discussed.'],
           ].map(([big, small, desc]) => (
             <div key={small as string} className="border-l-2 border-gold-500/60 pl-5">
               <p className="font-serif text-4xl text-gold-300">{big}</p>

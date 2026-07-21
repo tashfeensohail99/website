@@ -29,7 +29,7 @@ const FAQS = [
   },
   {
     q: 'What happens after I get a result?',
-    a: 'Nothing automatic. You can send the result to us on WhatsApp — it arrives with your answers attached, so we already understand your situation — or book a paid consultation. Either way you are under no obligation.',
+    a: 'Nothing automatic. You can send the result to us on WhatsApp — it arrives with your answers attached, so we already understand your situation — or book a free consultation. Either way you are under no obligation.',
   },
   {
     q: 'Does a previous refusal rule me out?',

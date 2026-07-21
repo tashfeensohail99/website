@@ -57,7 +57,7 @@ const STEPS: [string, string][] = [
   ],
   [
     'You decide — not us',
-    'If you go ahead, the fee comes off your bill. If you don’t, you still leave knowing where you stand, and you owe us nothing further.',
+    'If you go ahead, the work is paid and you’ll know the price before you commit. If you don’t, you still leave knowing where you stand, and you owe us nothing.',
   ],
 ];
 

@@ -128,7 +128,7 @@ export default function ToolsPage() {
       <CTASection
         eyebrow="Beyond the tools"
         title="When you want a real answer on your actual file"
-        subtitle="A paid consultation, credited to your fee if you go ahead. You leave knowing where you genuinely stand."
+        subtitle="The consultation is free, and you leave with a written summary of where you genuinely stand."
         page="tools-hub"
         waMessage="Hi, I’ve been using the tools on your site and I’d like to discuss my case."
       />

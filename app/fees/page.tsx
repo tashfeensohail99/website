@@ -29,7 +29,7 @@ import { site, SERVICE } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Our Fees',
   description:
-    'What we charge, what the government charges, and why we separate the two. A paid consultation credited against your fee.',
+    'What we charge, what the government charges, and why we separate the two. The consultation itself is free.',
   alternates: { canonical: '/fees' },
 };
 
