@@ -81,10 +81,17 @@ export const site = {
     {
       city: 'Islamabad',
       country: 'Pakistan',
-      address: '', // TODO(tashfeen)
-      hours: '',
-      phone: '',
-      mapUrl: '',
+      // Supplied 2026-07-21. Punctuation normalised to match the Lahore entry's
+      // house style — the raw string read "Sector F DHA, 2, 45730", which reads
+      // as a mangled paste rather than an address. VERIFY THIS AGAINST THE
+      // GOOGLE BUSINESS PROFILE before relying on it: it is emitted as
+      // schema.org streetAddress, and a mismatch splits the local-SEO signal
+      // instead of reinforcing it.
+      address:
+        'Office 3029B, 3rd Floor, World Trade Centre, Giga Mall, Sector F, DHA Phase 2, Islamabad 45730',
+      hours: '', // TODO(tashfeen)
+      phone: '', // TODO(tashfeen)
+      mapUrl: '', // TODO(tashfeen) — Google Business Profile link
     },
     {
       city: 'Mississauga',
