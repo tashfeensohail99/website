@@ -191,7 +191,8 @@ export function MobileNav({
                     href={d.href}
                     className="tap flex items-center gap-2.5 rounded-xl border border-white/15 bg-white/[0.06] px-3 text-sm text-white transition-colors hover:bg-white/[0.12]"
                   >
-                    {Flag ? <Flag className="h-4 w-auto shrink-0 rounded-[2px] ring-1 ring-white/25" /> : null}
+                    {/* `flag-sm`, not `h-4 w-auto` — see globals.css. */}
+                    {Flag ? <Flag className="flag-sm shrink-0 rounded-[2px] ring-1 ring-white/25" /> : null}
                     <span className="min-w-0 truncate">{d.label}</span>
                   </Link>
                 );

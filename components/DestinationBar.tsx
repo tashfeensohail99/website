@@ -63,8 +63,12 @@ export function DestinationBar() {
             }`}
           >
             {Flag ? (
+              // `flag-xs`, not `h-3 w-auto` — see the note in globals.css. The
+              // unlayered `img, svg { height: auto }` beats any layered height
+              // utility, so a Tailwind height class here renders the flag at
+              // its full viewBox size.
               <Flag
-                className={`h-3 w-auto shrink-0 rounded-[1px] ring-1 ring-white/25 ${
+                className={`flag-xs shrink-0 rounded-[1px] ring-1 ring-white/25 ${
                   current ? '' : 'opacity-80'
                 }`}
               />

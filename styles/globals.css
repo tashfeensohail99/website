@@ -183,6 +183,19 @@ h1, h2, h3 { font-family: var(--font-serif); letter-spacing: -0.01em; }
 
 img, svg { max-width: 100%; height: auto; }
 
+/* FIXED-HEIGHT INLINE FLAGS — and why `h-3 w-auto` does NOT work here.
+   The rule directly above is UNLAYERED; Tailwind's height utilities live in
+   `@layer utilities`. Unlayered CSS beats layered CSS regardless of
+   specificity, so `height: auto` wins and the flag renders at its intrinsic
+   viewBox size — 96×48 for Canada, which detonates the utility bar.
+   This is the THIRD time this rule has bitten: it is the same trap that makes
+   Tailwind's `hidden` silently inert on `.btn`. Any time an svg needs a fixed
+   height, it needs an unlayered class like these, not a utility.
+   Height-based (not width-based) so all four read as one row despite their
+   different aspect ratios — see FLAG_RATIO in components/Flags.tsx. */
+.flag-xs { height: 0.7rem; width: auto; }
+.flag-sm { height: 0.95rem; width: auto; }
+
 ::selection { background: var(--color-gold-300); color: var(--color-ink-950); }
 
 /* KEYBOARD FOCUS INDICATOR — WCAG 2.4.11 wants the indicator itself at 3:1.
